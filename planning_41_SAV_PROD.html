@@ -1,0 +1,433 @@
+<title>Planification SAV / PROD — Loir-et-Cher (41)</title>
+<style>
+  :root{
+    --paper:#f5f7f4; --surface:#ffffff; --surface-2:#eef1ee;
+    --ink:#131c23; --ink-2:#4d5d6a; --ink-3:#77878f;
+    --rule:#dde2de; --rule-2:#c6cec8;
+    --sav-bg:#e2edf5; --sav-ink:#12507e; --sav-edge:#a3c3dc;
+    --prod-bg:#f7ebdb; --prod-ink:#8a5313; --prod-edge:#e2c39b;
+    --ok:#2b6d48; --ok-bg:#e2efe6; --ko:#9c2e27; --ko-bg:#f8e5e3;
+    --warn:#8a6410; --warn-bg:#f9f0d8;
+    --accent:#12507e;
+    --shadow:0 1px 2px rgba(19,28,35,.06), 0 4px 14px rgba(19,28,35,.05);
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --paper:#0e151b; --surface:#161f27; --surface-2:#1c272f;
+      --ink:#e7eef3; --ink-2:#9dadba; --ink-3:#71828f;
+      --rule:#27333d; --rule-2:#35434e;
+      --sav-bg:#132f49; --sav-ink:#93c8ea; --sav-edge:#2b5679;
+      --prod-bg:#382916; --prod-ink:#e3ae70; --prod-edge:#6d4f2b;
+      --ok:#63bd88; --ok-bg:#152c1f; --ko:#e5786e; --ko-bg:#311a18;
+      --warn:#d9ab4a; --warn-bg:#2c2413;
+      --accent:#93c8ea;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 4px 16px rgba(0,0,0,.3);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#0e151b; --surface:#161f27; --surface-2:#1c272f;
+    --ink:#e7eef3; --ink-2:#9dadba; --ink-3:#71828f;
+    --rule:#27333d; --rule-2:#35434e;
+    --sav-bg:#132f49; --sav-ink:#93c8ea; --sav-edge:#2b5679;
+    --prod-bg:#382916; --prod-ink:#e3ae70; --prod-edge:#6d4f2b;
+    --ok:#63bd88; --ok-bg:#152c1f; --ko:#e5786e; --ko-bg:#311a18;
+    --warn:#d9ab4a; --warn-bg:#2c2413;
+    --accent:#93c8ea;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 4px 16px rgba(0,0,0,.3);
+  }
+  :root[data-theme="light"]{
+    --paper:#f5f7f4; --surface:#ffffff; --surface-2:#eef1ee;
+    --ink:#131c23; --ink-2:#4d5d6a; --ink-3:#77878f;
+    --rule:#dde2de; --rule-2:#c6cec8;
+    --sav-bg:#e2edf5; --sav-ink:#12507e; --sav-edge:#a3c3dc;
+    --prod-bg:#f7ebdb; --prod-ink:#8a5313; --prod-edge:#e2c39b;
+    --ok:#2b6d48; --ok-bg:#e2efe6; --ko:#9c2e27; --ko-bg:#f8e5e3;
+    --warn:#8a6410; --warn-bg:#f9f0d8;
+    --accent:#12507e;
+    --shadow:0 1px 2px rgba(19,28,35,.06), 0 4px 14px rgba(19,28,35,.05);
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    font-size:15px; line-height:1.55; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1240px; margin:0 auto; padding:40px 24px 80px; display:flex; flex-direction:column; gap:46px}
+  .mono{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace; font-variant-numeric:tabular-nums}
+
+  /* ---- header ---- */
+  header{display:flex; flex-direction:column; gap:14px; border-bottom:2px solid var(--ink); padding-bottom:22px}
+  .eyebrow{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace; font-size:11px; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--ink-3); display:flex; flex-wrap:wrap; gap:8px 18px}
+  h1{margin:0; font-size:clamp(26px,4vw,40px); line-height:1.08; letter-spacing:-.025em; font-weight:750; text-wrap:balance}
+  .lede{margin:0; max-width:66ch; color:var(--ink-2); font-size:16px}
+
+  /* ---- stat row ---- */
+  .stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px}
+  .stat{background:var(--surface); border:1px solid var(--rule); border-radius:3px; padding:16px 18px;
+    display:flex; flex-direction:column; gap:5px; box-shadow:var(--shadow)}
+  .stat .k{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace; font-size:10.5px; letter-spacing:.12em;
+    text-transform:uppercase; color:var(--ink-3)}
+  .stat .v{font-size:29px; font-weight:700; letter-spacing:-.03em; line-height:1;
+    font-variant-numeric:tabular-nums}
+  .stat .n{font-size:12.5px; color:var(--ink-2); line-height:1.4}
+  .stat.hi{border-color:var(--ok); background:var(--ok-bg)} .stat.hi .v{color:var(--ok)}
+  .stat.lo{border-color:var(--ko); background:var(--ko-bg)} .stat.lo .v{color:var(--ko)}
+
+  /* ---- sections ---- */
+  section{display:flex; flex-direction:column; gap:16px}
+  h2{margin:0; font-size:20px; letter-spacing:-.015em; font-weight:700; display:flex; align-items:baseline; gap:12px}
+  h2 .num{font-family:ui-monospace,monospace; font-size:12px; color:var(--accent); font-weight:600; letter-spacing:.08em}
+  h3{margin:0; font-size:14px; font-weight:650; letter-spacing:-.005em}
+  .note{margin:0; color:var(--ink-2); font-size:14px; max-width:74ch}
+  .note strong{color:var(--ink); font-weight:650}
+
+  /* ---- callout ---- */
+  .callout{border-left:3px solid var(--ko); background:var(--ko-bg); padding:14px 18px; border-radius:0 3px 3px 0;
+    display:flex; flex-direction:column; gap:6px}
+  .callout.good{border-left-color:var(--ok); background:var(--ok-bg)}
+  .callout .t{font-weight:700; font-size:14px; letter-spacing:-.005em}
+  .callout p{margin:0; font-size:14px; color:var(--ink-2)}
+
+  /* ---- planning grid ---- */
+  .scroller{overflow-x:auto; border:1px solid var(--rule); border-radius:3px; background:var(--surface); box-shadow:var(--shadow)}
+  table.grid{border-collapse:collapse; width:100%; min-width:1000px}
+  table.grid th, table.grid td{border:1px solid var(--rule); padding:0; vertical-align:top}
+  table.grid thead th{background:var(--ink); color:var(--paper); font-size:11.5px; font-weight:650;
+    letter-spacing:.06em; text-transform:uppercase; padding:9px 6px; text-align:center; position:sticky; top:0}
+  table.grid thead th.techcol{text-align:left; padding-left:12px; min-width:196px}
+  td.tech{padding:8px 12px; background:var(--surface-2); min-width:196px}
+  td.tech .id{font-weight:750; font-size:14px; letter-spacing:-.01em}
+  td.tech .rl{font-size:11.5px; color:var(--ink-2); line-height:1.35}
+  td.tech .dy{font-family:ui-monospace,monospace; font-size:10px; letter-spacing:.08em; color:var(--ink-3); text-transform:uppercase}
+  td.tech .dy.six{color:var(--warn); font-weight:700}
+  .half{display:flex; flex-direction:column; height:100%}
+  .hb{flex:1; padding:6px 7px; display:flex; flex-direction:column; gap:1px; min-height:34px; justify-content:center}
+  .hb + .hb{border-top:1px dashed var(--rule-2)}
+  .hb.sav{background:var(--sav-bg)} .hb.prod{background:var(--prod-bg)}
+  .hb .s{font-size:11.5px; font-weight:650; line-height:1.2; letter-spacing:-.01em}
+  .hb.sav .s{color:var(--sav-ink)} .hb.prod .s{color:var(--prod-ink)}
+  .hb .c{font-family:ui-monospace,monospace; font-size:9.5px; letter-spacing:.06em; opacity:.85}
+  .hb.sav .c{color:var(--sav-ink)} .hb.prod .c{color:var(--prod-ink)}
+  td.off{background:repeating-linear-gradient(135deg,transparent,transparent 5px,var(--rule) 5px,var(--rule) 6px)}
+  td.off span{display:block; padding:6px; font-size:10.5px; color:var(--ink-3); text-align:center; font-family:ui-monospace,monospace}
+  td.tot{background:var(--surface-2); text-align:center; padding:8px 6px; font-family:ui-monospace,monospace;
+    font-size:13px; font-weight:650; font-variant-numeric:tabular-nums}
+  td.tot .sv{color:var(--sav-ink)} td.tot .pr{color:var(--prod-ink); font-size:11px}
+  tfoot td{background:var(--ink); color:var(--paper); font-weight:700; font-size:12.5px; padding:9px 10px;
+    font-family:ui-monospace,monospace; font-variant-numeric:tabular-nums}
+
+  .legend{display:flex; flex-wrap:wrap; gap:8px 20px; font-size:12.5px; color:var(--ink-2); align-items:center}
+  .chip{display:inline-flex; align-items:center; gap:7px}
+  .sw{width:15px; height:15px; border-radius:2px; border:1px solid var(--rule-2)}
+  .sw.sav{background:var(--sav-bg); border-color:var(--sav-edge)}
+  .sw.prod{background:var(--prod-bg); border-color:var(--prod-edge)}
+
+  /* ---- data table ---- */
+  .scroller2{overflow-x:auto; border:1px solid var(--rule); border-radius:3px; background:var(--surface); box-shadow:var(--shadow)}
+  table.data{border-collapse:collapse; width:100%; min-width:720px; font-size:13.5px}
+  table.data th{background:var(--surface-2); text-align:left; padding:9px 12px; font-size:11px; letter-spacing:.08em;
+    text-transform:uppercase; color:var(--ink-2); font-weight:650; border-bottom:1px solid var(--rule-2); white-space:nowrap}
+  table.data td{padding:8px 12px; border-bottom:1px solid var(--rule); vertical-align:middle}
+  table.data tbody tr:last-child td{border-bottom:none}
+  table.data td.n{font-family:ui-monospace,monospace; font-variant-numeric:tabular-nums; text-align:right; white-space:nowrap}
+  table.data td.c{text-align:center}
+  .pill{display:inline-block; padding:2px 8px; border-radius:2px; font-size:11px; font-weight:700;
+    font-family:ui-monospace,monospace; letter-spacing:.04em; white-space:nowrap}
+  .pill.ok{background:var(--ok-bg); color:var(--ok); border:1px solid currentColor}
+  .pill.ko{background:var(--ko-bg); color:var(--ko); border:1px solid currentColor}
+  .dots{display:inline-flex; gap:3px; align-items:center}
+  .dot{width:7px; height:7px; border-radius:50%; background:var(--accent)}
+  .dot.e{background:none; border:1px solid var(--rule-2)}
+  .rythme{font-family:ui-monospace,monospace; font-size:11px; color:var(--ink-2); letter-spacing:.03em}
+
+  /* ---- distance matrix ---- */
+  table.dist{border-collapse:collapse; font-size:11.5px; min-width:760px; width:100%}
+  table.dist th{padding:5px 4px; font-size:10px; font-weight:600; color:var(--ink-2); background:var(--surface-2);
+    border:1px solid var(--rule)}
+  table.dist th.rowh{text-align:left; padding-left:10px; white-space:nowrap; font-size:11px; color:var(--ink)}
+  table.dist th.colh{height:96px; vertical-align:bottom; padding-bottom:8px}
+  table.dist th.colh div{writing-mode:vertical-rl; transform:rotate(180deg); text-align:left; white-space:nowrap}
+  table.dist td{padding:5px 4px; text-align:center; border:1px solid var(--rule);
+    font-family:ui-monospace,monospace; font-variant-numeric:tabular-nums}
+  td.d1{background:var(--ok-bg); color:var(--ok); font-weight:600}
+  td.d2{background:var(--warn-bg); color:var(--warn)}
+  td.d3{background:var(--ko-bg); color:var(--ko)}
+  td.dx{background:var(--ink); color:var(--ink)}
+
+  /* ---- cards ---- */
+  .cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(270px,1fr)); gap:14px}
+  .card{background:var(--surface); border:1px solid var(--rule); border-radius:3px; padding:16px 18px;
+    display:flex; flex-direction:column; gap:8px; box-shadow:var(--shadow)}
+  .card .h{display:flex; align-items:baseline; gap:9px}
+  .card .h .i{font-family:ui-monospace,monospace; font-size:11px; color:var(--accent); font-weight:700}
+  .card .h .t{font-weight:700; font-size:14px; letter-spacing:-.01em}
+  .card p{margin:0; font-size:13px; color:var(--ink-2); line-height:1.5}
+  .card .g{font-family:ui-monospace,monospace; font-size:12px; font-weight:650; color:var(--ok);
+    padding-top:6px; border-top:1px solid var(--rule)}
+  .card .g.paid{color:var(--ko)}
+
+  /* ---- rules / questions ---- */
+  ol.rules{margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:2px; counter-reset:r}
+  ol.rules li{display:grid; grid-template-columns:66px 1fr; gap:14px; padding:11px 14px; background:var(--surface);
+    border:1px solid var(--rule); border-radius:3px; align-items:start}
+  ol.rules li .when{font-family:ui-monospace,monospace; font-size:11px; font-weight:700; color:var(--accent);
+    letter-spacing:.03em; padding-top:1px}
+  ol.rules li p{margin:0; font-size:13.5px; color:var(--ink-2)}
+  ol.rules li p b{color:var(--ink); font-weight:650}
+  ol.rules li.key{border-color:var(--accent); border-width:1px 1px 1px 3px}
+
+  ol.qs{margin:0; padding:0 0 0 0; list-style:none; display:flex; flex-direction:column; gap:11px; counter-reset:q}
+  ol.qs li{counter-increment:q; display:grid; grid-template-columns:30px 1fr; gap:12px}
+  ol.qs li::before{content:"Q" counter(q); font-family:ui-monospace,monospace; font-size:11px; font-weight:700;
+    color:var(--accent); padding-top:3px}
+  ol.qs li .qt{font-weight:650; font-size:14px}
+  ol.qs li .qw{font-size:13px; color:var(--ink-2); margin-top:2px}
+
+  footer{border-top:1px solid var(--rule); padding-top:18px; font-size:12px; color:var(--ink-3); display:flex;
+    flex-direction:column; gap:5px}
+  @media (max-width:620px){ .wrap{padding:26px 14px 60px; gap:34px} ol.rules li{grid-template-columns:1fr; gap:4px} }
+</style>
+
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">
+    <span>Département 41 · Loir-et-Cher</span><span>12 secteurs GRDV · 59 NRO</span>
+    <span>11 techniciens</span><span>Source : suivi_volumes_PROD_72.xlsx — MAJ 28/07/2026</span>
+  </div>
+  <h1>Libérer de la disponibilité :<br>SAV à J+1/J+2, PROD à J+5/J+7</h1>
+  <p class="lede">Le volume PROD du fichier est majoré de 10 %. Le principe retenu : la tournée est figée
+     (technicien × jour × secteur), seul le partage SAV / PROD à l'intérieur de la journée est variable.</p>
+</header>
+
+<section>
+  <div class="stats">
+    <div class="stat"><span class="k">Capacité</span><span class="v">60,0</span>
+      <span class="n">jours-technicien / semaine<br>5 techs × 6 j + 6 techs × 5 j</span></div>
+    <div class="stat"><span class="k">Charge PROD +10 %</span><span class="v">46,3</span>
+      <span class="n">jours-tech / sem., soit 185 interventions</span></div>
+    <div class="stat"><span class="k">Reste pour le SAV</span><span class="v">13,7</span>
+      <span class="n">jours-tech / sem. = <b>79 créneaux</b> SAV</span></div>
+    <div class="stat lo"><span class="k">Grille actuelle</span><span class="v">3<span style="font-size:17px">/12</span></span>
+      <span class="n">secteurs tenant le J+1/J+2</span></div>
+    <div class="stat hi"><span class="k">Grille proposée</span><span class="v">12<span style="font-size:17px">/12</span></span>
+      <span class="n">secteurs tenant le J+1/J+2</span></div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="num">01</span>Ce qui bloque aujourd'hui</h2>
+  <div class="callout">
+    <span class="t">La grille actuelle maximise le nombre de créneaux, pas le délai d'accès</span>
+    <p>Elle réserve 142 créneaux SAV par semaine — c'est beaucoup. Mais elle les concentre sur trop peu de jours :
+       <b>Cormenon n'est visité que le jeudi et Vouzon que le mercredi</b>. Un client de Cormenon qui appelle le
+       vendredi attend jusqu'au jeudi suivant, soit J+6. Neuf secteurs sur douze ont au moins un jour d'appel
+       sans créneau à J+1 ni J+2.</p>
+  </div>
+  <div class="callout good">
+    <span class="t">Le correctif ne coûte rien : trois passages par semaine, en quinconce</span>
+    <p>Chaque secteur passe sur un rythme <b>Lundi-Mercredi-Vendredi</b> ou <b>Mardi-Jeudi-Samedi</b>. Avec trois
+       passages espacés, il existe toujours un créneau à J+1 ou J+2, quel que soit le jour d'appel. Ce sont les
+       <b>5 techniciens à 6 jours</b> qui portent le rythme Mardi-Jeudi-Samedi : sans leur samedi, les appels du
+       jeudi et du vendredi restent sans réponse.</p>
+  </div>
+</section>
+
+<section>
+  <h2><span class="num">02</span>Grille hebdomadaire proposée</h2>
+  <p class="note">Chaque case est coupée en deux : <strong>matin</strong> au-dessus, <strong>après-midi</strong> en dessous.
+     Cadences retenues — Blois 7 créneaux/jour, secteurs ruraux 5 (matin 3 + après-midi 2), PROD 4 interventions/jour.</p>
+  <div class="legend">
+    <span class="chip"><span class="sw sav"></span>Créneaux SAV réservés — ouverts à la prise de RDV J+1/J+2</span>
+    <span class="chip"><span class="sw prod"></span>PROD pré-affectée depuis le carnet J+5/J+7</span>
+    <span class="chip" style="color:var(--warn);font-weight:650">6 j — technicien travaillant le samedi</span>
+  </div>
+  <div class="scroller">
+  <table class="grid">
+    <thead><tr>
+      <th class="techcol">Technicien</th><th>Lundi</th><th>Mardi</th><th>Mercredi</th>
+      <th>Jeudi</th><th>Vendredi</th><th>Samedi</th><th>SAV<br>/sem</th><th>PROD<br>/sem</th>
+    </tr></thead>
+    <tbody id="gridbody"></tbody>
+    <tfoot><tr>
+      <td>TOTAL — 60 jours-technicien</td><td colspan="6" style="text-align:center">12 secteurs couverts · 3 passages minimum chacun</td>
+      <td style="text-align:center">149</td><td style="text-align:center">142</td>
+    </tr></tfoot>
+  </table>
+  </div>
+  <p class="note">La grille sert <strong>142 interventions PROD en direct</strong> alors que la demande majorée est de
+     185/semaine. Les 43 manquantes viennent de la bascule décrite ci-dessous — c'est le cœur du mécanisme.</p>
+</section>
+
+<section>
+  <h2><span class="num">03</span>Le moteur : réserver large, puis basculer</h2>
+  <p class="note">Réserver un créneau SAV ne le consomme pas. Tant qu'un créneau réservé n'est pas vendu, il redevient
+     de la PROD la veille au soir. C'est ce qui rend une réservation SAV généreuse presque gratuite — et c'est
+     précisément le levier qui libère de la disponibilité sans embaucher.</p>
+  <ol class="rules">
+    <li><span class="when">Permanent</span><p><b>La tournée ne bouge pas.</b> Technicien × jour × secteur est figé : distances maîtrisées, techniciens sur des secteurs qu'ils connaissent.</p></li>
+    <li class="key"><span class="when">Permanent</span><p><b>Trois passages par semaine et par secteur</b>, rythme L-Me-V ou Ma-J-S. C'est ce qui garantit mécaniquement le J+1/J+2.</p></li>
+    <li><span class="when">J-7 à J-5</span><p>La PROD ne se pose que sur les créneaux <b>non réservés</b> au SAV, dans le carnet J+5 à J+7. Le client PROD obtient bien son RDV à J+5/J+6/J+7.</p></li>
+    <li><span class="when">J-2 18 h</span><p>Ouverture à la prise de RDV SAV des créneaux réservés du jour J. Le client qui appelle voit de la disponibilité à J+1 et J+2.</p></li>
+    <li class="key"><span class="when">J-1 18 h</span><p><b>Bascule.</b> Tout créneau SAV encore libre pour le lendemain est réaffecté à une intervention PROD <b>du même secteur</b>, puisée dans le carnet J+5/J+7. Aucun créneau perdu.</p></li>
+    <li><span class="when">J-1 18 h</span><p>La bascule n'est possible que si le carnet PROD du secteur contient au moins 2 interventions en attente. Sur Cormenon et La Ferté-Imbault, maintenir ce stock tampon.</p></li>
+    <li><span class="when">Jour J</span><p>Un SAV urgent arrivé après la bascule prend la place d'une PROD du jour, qui repart en J+5. <b>La PROD absorbe l'aléa, jamais le SAV</b> — c'est elle qui a le délai le plus long.</p></li>
+    <li><span class="when">Hebdo</span><p>Si le remplissage SAV d'un secteur dépasse le seuil 4 semaines de suite, augmenter sa réservation. Le curseur suit la demande réelle.</p></li>
+  </ol>
+  <div class="callout">
+    <span class="t">Le seuil à surveiller : 53 % de remplissage</span>
+    <p>La grille réserve 149 créneaux SAV. L'équipe ne peut en consommer réellement que <b>79 par semaine</b>
+       (343/mois) une fois la PROD servie dans son délai. Au-delà de ce seuil, il n'y a plus assez de créneaux
+       à basculer et <b>la PROD décroche du J+5/J+7</b>. C'est l'indicateur numéro un à mettre sous surveillance.</p>
+  </div>
+</section>
+
+<section>
+  <h2><span class="num">04</span>Délai SAV, secteur par secteur</h2>
+  <div class="scroller2">
+  <table class="data">
+    <thead><tr>
+      <th>Secteur</th><th class="c">Passages actuels</th><th class="c">Délai actuel</th>
+      <th class="c">Passages proposés</th><th>Rythme</th><th class="c">Délai proposé</th>
+      <th class="n">Créneaux SAV/sem</th><th class="n">PROD/mois</th>
+    </tr></thead>
+    <tbody id="sectorbody"></tbody>
+  </table>
+  </div>
+  <p class="note">« PROD/mois » retient le mois le plus chargé entre octobre et mars, secteur par secteur, B2B inclus.
+     Le fichier source ne dimensionne que sur mars — or sur le 41 <strong>octobre est le mois haut</strong>
+     (705 interventions contre 656), ce qui sous-estime le besoin d'environ 7 %.</p>
+</section>
+
+<section>
+  <h2><span class="num">05</span>Cohérence des distances</h2>
+  <p class="note">Distances routières estimées : vol d'oiseau × 1,25, majoré de 8 km entre les deux rives de la Loire.
+     À recaler avec votre outil de tournées.</p>
+  <div class="scroller2"><table class="dist" id="distmx"></table></div>
+  <div class="legend" style="margin-top:2px">
+    <span class="chip"><span class="sw" style="background:var(--ok-bg);border-color:var(--ok)"></span>≤ 30 km — enchaînement de deux demi-journées acceptable</span>
+    <span class="chip"><span class="sw" style="background:var(--warn-bg);border-color:var(--warn)"></span>31–50 km — à éviter dans la même journée</span>
+    <span class="chip"><span class="sw" style="background:var(--ko-bg);border-color:var(--ko)"></span>&gt; 50 km — incohérent</span>
+  </div>
+  <div class="callout">
+    <span class="t">Deux incohérences géographiques dans la grille actuelle</span>
+    <p>Le technicien T5 couvre Crouy, Épiais, Vouzon, Cormenon et Blois : <b>Vouzon et Cormenon sont distants de
+       113 km</b> dans un même secteur. Et son jeudi enchaîne Épiais le matin puis Cormenon l'après-midi,
+       soit <b>46 km entre les deux vacations</b>. En rattachant Cormenon au Nord (Vendômois-Perche), l'enchaînement
+       le plus long de la grille proposée retombe à 30 km.</p>
+  </div>
+</section>
+
+<section>
+  <h2><span class="num">06</span>Leviers, du moins cher au plus cher</h2>
+  <div class="cards" id="levers"></div>
+</section>
+
+<section>
+  <h2><span class="num">07</span>Ce qu'il me manque pour affiner</h2>
+  <p class="note">Tout le dimensionnement ci-dessus tient sur une inconnue majeure : <strong>le fichier source ne
+     contient que la PROD</strong>. Le volume SAV a été déduit de votre capture d'écran, pas mesuré.</p>
+  <ol class="qs">
+    <li><div><div class="qt">Quel est le volume SAV réel, par secteur et par mois ?</div>
+      <div class="qw">C'est la donnée qui décide de tout. À 60 interventions/semaine, 11 techniciens suffisent.
+      À 100, il en faut 12. À 140, il en faut 14. J'ai pris 87/semaine par défaut, déduit de votre grille actuelle.</div></div></li>
+    <li><div><div class="qt">La cadence de 4 interventions PROD par technicien et par jour est-elle la bonne ?</div>
+      <div class="qw">Je l'ai retrouvée dans votre fichier (règle vérifiée sur 256 lignes sur 263). Si le réel est à 4,5 ou 5,
+      cela libère 5 jours-technicien par semaine, soit une trentaine de créneaux SAV.</div></div></li>
+    <li><div><div class="qt">Les 5 techniciens à 6 jours travaillent-ils le samedi, ou un autre jour tournant ?</div>
+      <div class="qw">Toute la proposition repose sur un samedi travaillé : c'est lui qui couvre les appels du jeudi
+      et du vendredi. Si c'est un lundi-samedi tournant, le rythme Ma-J-S doit être reconstruit.</div></div></li>
+    <li><div><div class="qt">Quel taux d'absence retenir (congés, arrêts, formation) ?</div>
+      <div class="qw">J'ai calculé à 100 % de présence, ce qui est optimiste. À 88 %, la capacité tombe à 52,8 jours-technicien
+      et il ne reste que 36 créneaux SAV par semaine. C'est un écart décisif.</div></div></li>
+    <li><div><div class="qt">Où habitent les techniciens ?</div>
+      <div class="qw">J'ai proposé des bases (Vendôme, Romorantin, Pontlevoy, Crouy) déduites de la géographie.
+      Si les domiciles réels sont ailleurs, les clusters se réorganisent — c'est du temps de trajet payé.</div></div></li>
+    <li><div><div class="qt">Un SAV peut-il être servi par n'importe quel technicien, ou faut-il une habilitation ?</div>
+      <div class="qw">Si tous savent faire du SAV, la bascule J-1 fonctionne partout. Sinon, il faut réserver les
+      créneaux SAV aux seuls habilités et la grille change.</div></div></li>
+    <li><div><div class="qt">Quelle est la durée réelle d'une intervention SAV par rapport à une PROD ?</div>
+      <div class="qw">J'ai déduit 5 SAV/jour contre 4 PROD en rural depuis votre capture. Ce rapport pilote toute
+      la conversion entre créneaux basculés et interventions PROD récupérées.</div></div></li>
+    <li><div><div class="qt">Y a-t-il des engagements contractuels ou pénalités sur le J+1/J+2 ?</div>
+      <div class="qw">Si oui, le curseur de réservation doit être calé sur le pire cas et non sur la moyenne,
+      et le scénario à 13 techniciens devient sans doute moins cher que les pénalités.</div></div></li>
+  </ol>
+</section>
+
+<footer>
+  <span>Volumes : suivi_volumes_PROD_72.xlsx, onglets « Suivi des volumes PROD » et « Volume par NRO », mise à jour du 28/07/2026 — 12 secteurs GRDV, 59 NRO sur le département 41.</span>
+  <span>Cadence PROD rétro-calculée depuis le fichier : Nbr tech nécessaire = ARRONDI.SUP(Moy/Jr mars ÷ 4), règle vérifiée sur 256 des 263 lignes. Distances estimées, à confirmer par l'outil de tournées.</span>
+</footer>
+</div>
+
+<script>
+const G=[
+ ["T1","Référent SAV Blois",5,[["Blois","SAV",4,"Blois","SAV",3],["Blois","SAV",4,"Blois","SAV",3],["Blois","SAV",4,"Blois","SAV",3],["Blois","SAV",4,"Blois","SAV",3],["Blois","SAV",4,"Blois","SAV",3],null],35,0],
+ ["T2","Blois — mixte SAV / PROD",6,[["Blois","SAV",4,"Blois","PROD",2],["Blois","SAV",4,"Blois","PROD",2],["Blois","SAV",4,"Blois","PROD",2],["Blois","SAV",4,"Blois","PROD",2],["Blois","SAV",4,"Blois","PROD",2],["Blois","SAV",4,"Blois","PROD",2]],24,12],
+ ["T3","Sud-Ouest — Pontlevoy / Valencisse",6,[["Pontlevoy","SAV",3,"Pontlevoy","PROD",2],["Valencisse","SAV",3,"Valencisse","PROD",2],["Pontlevoy","SAV",3,"Pontlevoy","PROD",2],["Valencisse","SAV",3,"Valencisse","PROD",2],["Pontlevoy","SAV",3,"Pontlevoy","PROD",2],["Valencisse","SAV",3,"Valencisse","PROD",2]],18,12],
+ ["T4","Nord — Vendômois / Perche / Beauce",6,[["Vendôme","SAV",3,"Épiais","SAV",2],["Montoire","SAV",3,"Cormenon","SAV",2],["Vendôme","SAV",3,"Épiais","SAV",2],["Montoire","SAV",3,"Cormenon","SAV",2],["Vendôme","SAV",3,"Épiais","SAV",2],["Montoire","SAV",3,"Cormenon","SAV",2]],30,0],
+ ["T5","Sologne Sud — Mur / Romorantin / La Ferté",6,[["Mur-de-Sologne","SAV",3,"Mur-de-Sologne","PROD",2],["Romorantin","SAV",3,"La Ferté-Imb.","SAV",2],["Mur-de-Sologne","SAV",3,"Mur-de-Sologne","PROD",2],["Romorantin","SAV",3,"La Ferté-Imb.","SAV",2],["Mur-de-Sologne","SAV",3,"Mur-de-Sologne","PROD",2],["Romorantin","SAV",3,"La Ferté-Imb.","SAV",2]],24,6],
+ ["T6","Sologne Est — Crouy / Vouzon",6,[["Crouy-s-Cosson","SAV",3,"Crouy-s-Cosson","PROD",2],["Vouzon","SAV",3,"Vouzon","PROD",2],["Crouy-s-Cosson","SAV",3,"Crouy-s-Cosson","PROD",2],["Vouzon","SAV",3,"Vouzon","PROD",2],["Crouy-s-Cosson","SAV",3,"Crouy-s-Cosson","PROD",2],["Vouzon","SAV",3,"Vouzon","PROD",2]],18,12],
+ ["T7","PROD — Blois agglo",5,Array(5).fill(["Blois","PROD",2,"Blois","PROD",2]).concat([null]),0,20],
+ ["T8","PROD — Blois agglo",5,Array(5).fill(["Blois","PROD",2,"Blois","PROD",2]).concat([null]),0,20],
+ ["T9","PROD — Nord",5,Array(5).fill(["Vendôme","PROD",2,"Épiais","PROD",2]).concat([null]),0,20],
+ ["T10","PROD — Sologne",5,Array(5).fill(["Romorantin","PROD",2,"Mur-de-Sologne","PROD",2]).concat([null]),0,20],
+ ["T11","PROD — Sud-Ouest",5,Array(5).fill(["Pontlevoy","PROD",2,"Pontlevoy","PROD",2]).concat([null]),0,20],
+];
+document.getElementById('gridbody').innerHTML=G.map(([id,role,nj,days,sv,pr])=>{
+  const cells=days.map(d=>{
+    if(!d) return '<td class="off"><span>repos</span></td>';
+    const[s1,t1,n1,s2,t2,n2]=d;
+    return `<td><div class="half">
+      <div class="hb ${t1.toLowerCase()}"><span class="s">${s1}</span><span class="c">${t1} ${n1}</span></div>
+      <div class="hb ${t2.toLowerCase()}"><span class="s">${s2}</span><span class="c">${t2} ${n2}</span></div>
+    </div></td>`;}).join('');
+  return `<tr><td class="tech"><div class="id">${id}</div><div class="rl">${role}</div>
+    <div class="dy ${nj===6?'six':''}">${nj} jours</div></td>${cells}
+    <td class="tot"><span class="sv">${sv||'—'}</span></td><td class="tot"><span class="pr">${pr||'—'}</span></td></tr>`;
+}).join('');
+
+const S=[
+ ["Blois",5,"OK",6,"Quotidien",59,243],["Pontlevoy",5,"OK",3,"L-Me-V",9,89],
+ ["Valencisse",2,"KO",3,"Ma-J-S",9,44],["Vendôme",3,"OK",3,"L-Me-V",9,39],
+ ["Épiais",3,"KO",3,"L-Me-V",6,51],["Montoire-sur-le-Loir",2,"KO",3,"Ma-J-S",9,48],
+ ["Cormenon",1,"KO",3,"Ma-J-S",6,19],["Crouy-sur-Cosson",2,"KO",3,"L-Me-V",9,52],
+ ["Vouzon",1,"KO",3,"Ma-J-S",9,33],["Mur-de-Sologne",2,"KO",3,"L-Me-V",9,49],
+ ["Romorantin-Lanthenay",2,"KO",3,"Ma-J-S",9,44],["La Ferté-Imbault",2,"KO",3,"Ma-J-S",6,18],
+];
+const dots=(n,max=6)=>'<span class="dots">'+Array.from({length:max},(_,i)=>
+  `<span class="dot${i<n?'':' e'}"></span>`).join('')+'</span>';
+document.getElementById('sectorbody').innerHTML=S.map(([n,pa,st,pp,ry,cr,pm])=>
+ `<tr><td><b>${n}</b></td>
+  <td class="c">${dots(pa)}</td>
+  <td class="c"><span class="pill ${st==='OK'?'ok':'ko'}">${st==='OK'?'J+1/J+2':'jusqu\'à J+6'}</span></td>
+  <td class="c">${dots(pp)}</td><td><span class="rythme">${ry}</span></td>
+  <td class="c"><span class="pill ok">J+1/J+2</span></td>
+  <td class="n">${cr}</td><td class="n">${pm}</td></tr>`).join('');
+
+const P=[["Blois",47.586,1.336,"X"],["Valencisse",47.590,1.220,"N"],["Pontlevoy",47.395,1.256,"S"],
+ ["Vendôme",47.793,1.066,"N"],["Épiais",47.760,1.375,"N"],["Montoire",47.752,0.866,"N"],
+ ["Cormenon",47.955,0.980,"N"],["Crouy-s-Cosson",47.680,1.610,"S"],["Vouzon",47.660,2.020,"S"],
+ ["Mur-de-Sologne",47.383,1.612,"S"],["Romorantin",47.357,1.744,"S"],["La Ferté-Imbault",47.395,1.976,"S"]];
+const R=x=>x*Math.PI/180;
+const km=(a,b)=>{const x=(R(b[2])-R(a[2]))*Math.cos((R(a[1])+R(b[1]))/2),y=R(b[1])-R(a[1]);
+  let d=6371*Math.hypot(x,y)*1.25; if(a[3]!==b[3]&&a[3]!=="X"&&b[3]!=="X") d+=8; return Math.round(d);};
+document.getElementById('distmx').innerHTML=
+ '<thead><tr><th class="rowh"></th>'+P.map(p=>`<th class="colh"><div>${p[0]}</div></th>`).join('')+'</tr></thead><tbody>'+
+ P.map(a=>`<tr><th class="rowh">${a[0]}</th>`+P.map(b=>{
+   if(a[0]===b[0]) return '<td class="dx">·</td>';
+   const d=km(a,b); return `<td class="${d<=30?'d1':d<=50?'d2':'d3'}">${d}</td>`;}).join('')+'</tr>').join('')+'</tbody>';
+
+const L=[["1","Rythme L-Me-V / Ma-J-S","Trois passages hebdomadaires par secteur au lieu de un ou deux.","J+1/J+2 tenu sur 12 secteurs au lieu de 3","free"],
+ ["2","Bascule J-1 des créneaux SAV","Tout créneau SAV non vendu à J-1 18 h est rempli par une PROD du carnet J+5/J+7.","≈ 48 interventions PROD récupérées/sem.","free"],
+ ["3","Journées mixtes SAV + PROD","L'après-midi se fait dans le secteur du SAV du matin : plus de trajet inter-secteur.","Cadence PROD 4 → 5 sur ces demi-journées","free"],
+ ["4","Samedi des 5 techniciens à 6 jours","Les affecter aux secteurs du rythme Mardi-Jeudi-Samedi.","Couvre les appels du jeudi et du vendredi","free"],
+ ["5","Recomposition géographique","Cormenon rattaché au Nord et non à la Sologne Est.","Enchaînement le plus long : 46 → 30 km","free"],
+ ["6","Renfort d'effectif","Deux techniciens supplémentaires, si le SAV réel dépasse 90/semaine.","+10 jours-tech/sem. ≈ 55 créneaux SAV","paid"]];
+document.getElementById('levers').innerHTML=L.map(([i,t,d,g,c])=>
+ `<div class="card"><div class="h"><span class="i">${i}</span><span class="t">${t}</span></div>
+  <p>${d}</p><div class="g ${c==='paid'?'paid':''}">${g} · ${c==='paid'?'2 salaires':'coût nul'}</div></div>`).join('');
+</script>
