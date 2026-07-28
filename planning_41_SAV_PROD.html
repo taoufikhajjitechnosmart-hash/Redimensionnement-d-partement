@@ -195,26 +195,26 @@
 <header>
   <div class="eyebrow">
     <span>Département 41 · Loir-et-Cher</span><span>12 secteurs GRDV · 59 NRO</span>
-    <span>11 techniciens</span><span>Source : suivi_volumes_PROD_72.xlsx — MAJ 28/07/2026</span>
+    <span>13 techniciens requis (11 aujourd'hui)</span><span>Source : suivi_volumes_PROD_72.xlsx — MAJ 28/07/2026</span>
   </div>
   <h1>Libérer de la disponibilité :<br>SAV à J+1/J+2, PROD à J+5/J+7</h1>
   <p class="lede">Le volume PROD du fichier est majoré de 10 %. Le principe retenu : la tournée est figée
      (technicien × jour × secteur), seul le partage SAV / PROD à l'intérieur de la journée est variable.
-     Présence comptée à 100 %, samedi travaillé par les 5 techniciens à 6 jours.</p>
+     Présence comptée à 100 %, samedi travaillé par les techniciens à 6 jours.</p>
 </header>
 
 <section>
   <div class="stats">
-    <div class="stat"><span class="k">Capacité</span><span class="v">60,0</span>
-      <span class="n">jours-technicien / semaine<br>5 techs × 6 j + 6 techs × 5 j</span></div>
+    <div class="stat"><span class="k">Capacité requise</span><span class="v">72,0</span>
+      <span class="n">jours-technicien / semaine<br>7 techs × 6 j + 6 techs × 5 j</span></div>
     <div class="stat"><span class="k">Charge PROD +10 %</span><span class="v">46,3</span>
       <span class="n">jours-tech / sem., soit 185 interventions</span></div>
-    <div class="stat"><span class="k">Reste pour le SAV</span><span class="v">13,7</span>
-      <span class="n">jours-tech / sem. = <b>78 interventions</b> SAV</span></div>
-    <div class="stat lo"><span class="k">Grille actuelle</span><span class="v">3<span style="font-size:17px">/12</span></span>
-      <span class="n">secteurs tenant le J+1/J+2</span></div>
+    <div class="stat"><span class="k">Besoin SAV mesuré</span><span class="v">142</span>
+      <span class="n">interventions / sem. — <b>615 / mois</b><br>calculées sur votre planning hebdo</span></div>
+    <div class="stat lo"><span class="k">Écart à 11 techniciens</span><span class="v">−2,1</span>
+      <span class="n">ETP — soit 11,3 jours-tech / sem. manquants</span></div>
     <div class="stat hi"><span class="k">Grille proposée</span><span class="v">12<span style="font-size:17px">/12</span></span>
-      <span class="n">secteurs tenant le J+1/J+2</span></div>
+      <span class="n">secteurs tenant le J+1/J+2<br>contre 3/12 aujourd'hui</span></div>
   </div>
 </section>
 
@@ -228,12 +228,12 @@
        sans créneau à J+1 ni J+2.</p>
   </div>
   <div class="callout">
-    <span class="t">Et le volume visé dépasse ce que 11 techniciens peuvent produire</span>
-    <p>Vous m'avez confirmé qu'un « cr » de la capture est une intervention : la grille actuelle vise donc
-       <b>142 interventions SAV par semaine</b>. Or une fois la PROD servie dans son délai J+5/J+7, il ne reste
-       que <b>78 interventions SAV par semaine</b> de capacité réelle. L'écart est structurel :
-       <b>142 SAV/semaine demandent 13 techniciens</b>, pas 11. La réorganisation ci-dessous récupère tout ce qui
-       peut l'être sans embauche ; elle ne crée pas les 2 ETP manquants.</p>
+    <span class="t">Le volume SAV, calculé sur votre planning : 142 interventions par semaine</span>
+    <p>J'ai additionné les créneaux de votre planning hebdomadaire : <b>142 par semaine, soit 615 par mois</b>,
+       pour 25 jours-technicien. Ajoutés aux <b>46,3 jours-technicien</b> de PROD majorée de 10 %, cela fait
+       <b>71,3 jours-technicien par semaine</b> — alors que 11 techniciens en produisent 60.
+       L'écart est structurel : <b>il manque 2,1 ETP</b>. Aucune réorganisation ne les crée ;
+       la grille ci-dessous est calée sur <b>13 techniciens, dont 7 à 6 jours</b>.</p>
   </div>
   <div class="callout good">
     <span class="t">Le correctif ne coûte rien : trois passages par semaine, en quinconce</span>
@@ -251,7 +251,7 @@
   <div class="legend">
     <span class="chip"><span class="sw sav"></span>Créneaux SAV réservés — ouverts à la prise de RDV J+1/J+2</span>
     <span class="chip"><span class="sw prod"></span>PROD pré-affectée depuis le carnet J+5/J+7</span>
-    <span class="chip" style="color:var(--warn);font-weight:650">6 j — technicien travaillant le samedi</span>
+    <span class="chip" style="color:var(--warn);font-weight:650">6 j — les 7 techniciens travaillant le samedi</span>
   </div>
   <div class="scroller">
   <table class="grid">
@@ -261,15 +261,16 @@
     </tr></thead>
     <tbody id="gridbody"></tbody>
     <tfoot><tr>
-      <td>TOTAL — 60 jours-technicien</td><td colspan="6" style="text-align:center">12 secteurs couverts · 3 passages minimum chacun</td>
-      <td style="text-align:center">137</td><td style="text-align:center">148</td>
+      <td>TOTAL — 72 jours-technicien</td><td colspan="6" style="text-align:center">12 secteurs couverts · 3 passages minimum chacun</td>
+      <td style="text-align:center">142</td><td style="text-align:center">180</td>
     </tr></tfoot>
   </table>
   </div>
-  <p class="note">La grille sert <strong>148 interventions PROD en direct</strong> alors que la demande majorée est de
-     185/semaine. Les 37 manquantes viennent de la bascule décrite ci-dessous — c'est le cœur du mécanisme.
-     T1, le technicien 100 % SAV, couvre Blois tous les jours et Valencisse les lundis, mercredis et vendredis
-     après-midi : les deux hubs sont distants de 11 km.</p>
+  <p class="note">Elle sert <strong>exactement les 142 interventions SAV attendues</strong>, secteur par secteur, et
+     <strong>180 interventions PROD en direct</strong> sur les 185 nécessaires — les 5 manquantes passent par la bascule
+     décrite ci-dessous. Charge réelle : 67 jours-technicien consommés sur 72, soit <strong>5 jours-technicien de
+     marge</strong> pour les aléas. T1, le technicien 100 % SAV, reste sur Blois et Valencisse comme vous l'avez
+     demandé : 11 km entre les deux hubs.</p>
 </section>
 
 <section>
@@ -288,10 +289,11 @@
     <li><span class="when">Hebdo</span><p>Si le remplissage SAV d'un secteur dépasse le seuil 4 semaines de suite, augmenter sa réservation. Le curseur suit la demande réelle.</p></li>
   </ol>
   <div class="callout">
-    <span class="t">Le seuil à surveiller : 57 % de remplissage</span>
-    <p>La grille réserve 137 créneaux SAV. L'équipe ne peut en consommer réellement que <b>78 par semaine</b>
-       (340/mois) une fois la PROD servie dans son délai. Au-delà de ce seuil, il n'y a plus assez de créneaux
-       à basculer et <b>la PROD décroche du J+5/J+7</b>. C'est l'indicateur numéro un à mettre sous surveillance.</p>
+    <span class="t">À 13 techniciens, la bascule redevient un simple amortisseur</span>
+    <p>La grille couvre la totalité du besoin SAV : les créneaux sont calés sur le volume réel, pas surréservés.
+       La bascule J-1 ne sert plus à financer le SAV mais à <b>récupérer les 5 interventions PROD</b> qui manquent
+       chaque semaine et à absorber les jours creux. Si vous restez à 11 techniciens, elle redevient vitale :
+       elle ne permet alors de servir que <b>78 des 142 interventions SAV</b>, soit 55 % du besoin.</p>
   </div>
 </section>
 
@@ -302,7 +304,7 @@
     <thead><tr>
       <th>Secteur</th><th class="c">Passages actuels</th><th class="c">Délai actuel</th>
       <th class="c">Passages proposés</th><th>Rythme</th><th class="c">Délai proposé</th>
-      <th class="n">Créneaux SAV/sem</th><th class="n">PROD/mois</th>
+      <th class="n">SAV/sem (mesuré)</th><th class="n">PROD/mois</th>
     </tr></thead>
     <tbody id="sectorbody"></tbody>
   </table>
@@ -338,38 +340,36 @@
 
 <section>
   <h2><span class="num">07</span>Hypothèses retenues et questions ouvertes</h2>
-  <p class="note">Ce que vous avez confirmé : le samedi est bien travaillé par les 5 techniciens à 6 jours ·
-     la présence est comptée à 100 %, les absences étant déjà couvertes · 10 techniciens polyvalents et 1 dédié
-     100 % SAV sur Blois et Valencisse · un « cr » de la capture est une intervention.</p>
+  <p class="note">Ce que vous avez confirmé : samedi travaillé par les techniciens à 6 jours · présence comptée
+     à 100 %, les absences étant couvertes · 10 techniciens polyvalents et 1 dédié 100 % SAV sur Blois et Valencisse ·
+     un « cr » est une intervention. Le volume SAV n'est donc plus une hypothèse : il est calculé sur votre planning.</p>
   <ol class="qs">
-    <li><div><div class="qt">Les 142 interventions de la capture sont-elles la demande constatée, ou une cible de couverture ?</div>
-      <div class="qw">Votre légende indiquait « tous secteurs entre 100 % et 156 % de la demande ». Si la capture
-      surcouvre de 25 %, la demande réelle est d'environ 114/semaine et il faut 12 techniciens. Si les 142 sont
-      des interventions réellement réalisées, il en faut 13. C'est la seule chose qui sépare encore ces deux réponses.</div></div></li>
-    <li><div><div class="qt">Ce volume SAV, secteur par secteur ?</div>
-      <div class="qw">J'ai réparti la réservation proportionnellement au volume PROD. Si le SAV se concentre sur
-      certains secteurs — un NRO récent, une zone d'habitat dense — la répartition des 137 créneaux doit suivre,
-      et la colonne O de l'onglet « Demande 41 » est faite pour ça.</div></div></li>
-    <li><div><div class="qt">La cadence de 4 interventions PROD par technicien et par jour est-elle la bonne ?</div>
-      <div class="qw">Je l'ai retrouvée dans votre fichier (règle vérifiée sur 256 lignes sur 263). Si le réel est
-      à 4,5, cela libère 5 jours-technicien par semaine, soit une trentaine d'interventions SAV — un demi-technicien
-      gagné sans rien embaucher.</div></div></li>
+    <li><div><div class="qt">Que recouvre exactement l'« objectif dispo 75 % » du titre de votre planning ?</div>
+      <div class="qw">C'est la dernière ambiguïté sur le volume. Si les 142 créneaux doivent tous être servis,
+      il faut 13 techniciens. Si l'objectif est qu'un client trouve un créneau dans 75 % des cas — donc environ
+      107 interventions réellement posées — <b>12 techniciens suffisent</b>. Un salaire d'écart.</div></div></li>
+    <li><div><div class="qt">Validez-vous le passage à 13 techniciens, dont 7 à 6 jours ?</div>
+      <div class="qw">Cela suppose 2 recrutements et 2 passages de 5 à 6 jours. Sinon, à 11 techniciens,
+      je peux tenir le J+1/J+2 sur les 12 secteurs mais seulement pour 78 des 142 interventions attendues :
+      il faudra arbitrer quels secteurs sont servis en priorité.</div></div></li>
     <li><div><div class="qt">Où habitent les techniciens ?</div>
-      <div class="qw">J'ai proposé des bases (Vendôme, Romorantin, Pontlevoy, Crouy) déduites de la seule géographie.
-      Si les domiciles réels sont ailleurs, les clusters se réorganisent — c'est du temps de trajet payé tous les jours.</div></div></li>
-    <li><div><div class="qt">Le technicien 100 % SAV doit-il rester sur Blois et Valencisse, ou peut-il basculer ailleurs ?</div>
-      <div class="qw">Blois concentre 34 % du volume départemental, donc l'y fixer se défend. Mais c'est aussi le
-      secteur où les 10 polyvalents sont les plus nombreux : le dédier à un secteur rural isolé libérerait
-      davantage de disponibilité là où elle manque le plus.</div></div></li>
-    <li><div><div class="qt">Quelle est la durée réelle d'une intervention SAV par rapport à une PROD ?</div>
-      <div class="qw">J'ai déduit 5 SAV/jour contre 4 PROD en rural depuis votre capture. Ce rapport pilote toute
-      la conversion entre créneaux basculés et interventions PROD récupérées.</div></div></li>
-    <li><div><div class="qt">Y a-t-il des engagements contractuels ou pénalités sur le J+1/J+2 ?</div>
-      <div class="qw">Si oui, le curseur de réservation doit être calé sur le pire cas et non sur la moyenne,
-      et les 2 techniciens de renfort deviennent sans doute moins chers que les pénalités.</div></div></li>
+      <div class="qw">J'ai proposé des bases (Blois, Vendôme, Pontlevoy, Romorantin, Crouy) déduites de la seule
+      géographie. Si les domiciles réels sont ailleurs, les clusters se réorganisent — c'est du temps de trajet
+      payé tous les jours, et cela peut coûter plus qu'un des enchaînements que j'ai optimisés.</div></div></li>
+    <li><div><div class="qt">La cadence de 4 interventions PROD par technicien et par jour est-elle la bonne ?</div>
+      <div class="qw">Je l'ai retrouvée dans votre fichier de volumes (règle vérifiée sur 256 lignes sur 263).
+      Si le réel est à 4,5, la charge PROD tombe de 46,3 à 41,1 jours-technicien et <b>12 techniciens suffisent</b>
+      même en servant les 142 interventions SAV.</div></div></li>
     <li><div><div class="qt">Le carnet PROD est-il assez fourni sur les petits secteurs pour alimenter la bascule ?</div>
       <div class="qw">Cormenon fait 19 interventions PROD par mois, La Ferté-Imbault 18 : moins d'une par jour ouvré.
-      Si le carnet y est vide, les créneaux SAV non vendus sont perdus au lieu d'être recyclés.</div></div></li>
+      Si le carnet y est vide, un créneau SAV non vendu est perdu au lieu d'être recyclé.</div></div></li>
+    <li><div><div class="qt">Y a-t-il des engagements contractuels ou des pénalités sur le J+1/J+2 ?</div>
+      <div class="qw">Si oui, les 2 techniciens de renfort sont probablement moins chers que les pénalités,
+      et l'arbitrage se règle tout seul.</div></div></li>
+    <li><div><div class="qt">Les volumes PROD d'octobre sont-ils une prévision ou un historique ?</div>
+      <div class="qw">J'ai retenu le mois le plus chargé entre octobre et mars, secteur par secteur. Si octobre
+      est une prévision haute qui ne se réalisera pas, la charge PROD baisse d'environ 3 jours-technicien
+      et le besoin en renfort se réduit d'autant.</div></div></li>
   </ol>
 </section>
 
@@ -381,17 +381,19 @@
 
 <script>
 const G=[
- ["T1","100 % SAV — Blois + Valencisse",5,[["Blois","SAV",4,"Valencisse","SAV",2],["Blois","SAV",4,"Blois","SAV",3],["Blois","SAV",4,"Valencisse","SAV",2],["Blois","SAV",4,"Blois","SAV",3],["Blois","SAV",4,"Valencisse","SAV",2],null],32,0],
- ["T2","Blois — mixte SAV / PROD",6,[["Blois","SAV",4,"Blois","PROD",2],["Blois","SAV",4,"Blois","PROD",2],["Blois","SAV",4,"Blois","PROD",2],["Blois","SAV",4,"Blois","PROD",2],["Blois","SAV",4,"Blois","PROD",2],["Blois","SAV",4,"Blois","PROD",2]],24,12],
- ["T3","Sud-Ouest — Pontlevoy",6,[["Pontlevoy","SAV",3,"Pontlevoy","PROD",2],["Pontlevoy","PROD",2,"Pontlevoy","PROD",2],["Pontlevoy","SAV",3,"Pontlevoy","PROD",2],["Pontlevoy","PROD",2,"Pontlevoy","PROD",2],["Pontlevoy","SAV",3,"Pontlevoy","PROD",2],["Pontlevoy","PROD",2,"Pontlevoy","PROD",2]],9,18],
- ["T4","Nord — Vendômois / Perche / Beauce",6,[["Vendôme","SAV",3,"Épiais","SAV",2],["Montoire","SAV",3,"Cormenon","SAV",2],["Vendôme","SAV",3,"Épiais","SAV",2],["Montoire","SAV",3,"Cormenon","SAV",2],["Vendôme","SAV",3,"Épiais","SAV",2],["Montoire","SAV",3,"Cormenon","SAV",2]],30,0],
- ["T5","Sologne Sud — Mur / Romorantin / La Ferté",6,[["Mur-de-Sologne","SAV",3,"Mur-de-Sologne","PROD",2],["Romorantin","SAV",3,"La Ferté-Imb.","SAV",2],["Mur-de-Sologne","SAV",3,"Mur-de-Sologne","PROD",2],["Romorantin","SAV",3,"La Ferté-Imb.","SAV",2],["Mur-de-Sologne","SAV",3,"Mur-de-Sologne","PROD",2],["Romorantin","SAV",3,"La Ferté-Imb.","SAV",2]],24,6],
- ["T6","Sologne Est — Crouy / Vouzon",6,[["Crouy-s-Cosson","SAV",3,"Crouy-s-Cosson","PROD",2],["Vouzon","SAV",3,"Vouzon","PROD",2],["Crouy-s-Cosson","SAV",3,"Crouy-s-Cosson","PROD",2],["Vouzon","SAV",3,"Vouzon","PROD",2],["Crouy-s-Cosson","SAV",3,"Crouy-s-Cosson","PROD",2],["Vouzon","SAV",3,"Vouzon","PROD",2]],18,12],
- ["T7","PROD — Blois agglo",5,Array(5).fill(["Blois","PROD",2,"Blois","PROD",2]).concat([null]),0,20],
- ["T8","PROD — Blois agglo",5,Array(5).fill(["Blois","PROD",2,"Blois","PROD",2]).concat([null]),0,20],
- ["T9","PROD — Nord",5,Array(5).fill(["Vendôme","PROD",2,"Épiais","PROD",2]).concat([null]),0,20],
- ["T10","PROD — Sologne",5,Array(5).fill(["Romorantin","PROD",2,"Mur-de-Sologne","PROD",2]).concat([null]),0,20],
- ["T11","PROD — Sud-Ouest",5,Array(5).fill(["Valencisse","PROD",2,"Pontlevoy","PROD",2]).concat([null]),0,20],
+ ["T1","100 % SAV — Blois + Valencisse",6,[["Blois","SAV",4,"Blois","SAV",3],["Blois","SAV",4,"Valencisse","SAV",2],["Blois","SAV",4,"Blois","SAV",3],["Blois","SAV",4,"Valencisse","SAV",2],["Blois","SAV",4,"Blois","SAV",3],["Blois","SAV",4,"Valencisse","SAV",2]],39,0],
+ ["T2","Blois — mixte SAV / PROD",6,[["Blois","PROD",2,"Blois","SAV",3],["Blois","PROD",2,"Blois","PROD",2],["Blois","PROD",2,"Blois","SAV",3],["Blois","PROD",2,"Blois","PROD",2],["Blois","PROD",2,"Blois","SAV",3],["Blois","PROD",2,"Blois","PROD",2]],9,18],
+ ["T3","Blois — PROD",5,[["Blois","PROD",2,"Blois","PROD",2],["Blois","PROD",2,"Blois","PROD",2],["Blois","PROD",2,"Blois","PROD",2],["Blois","PROD",2,"Blois","PROD",2],["Blois","PROD",2,"Blois","PROD",2],null],0,20],
+ ["T4","Blois — PROD",5,[["Blois","PROD",2,"Blois","PROD",2],["Blois","PROD",2,"Blois","PROD",2],["Blois","PROD",2,"Blois","PROD",2],["Blois","PROD",2,"Blois","PROD",2],["Blois","PROD",2,"Blois","PROD",2],null],0,20],
+ ["T5","Sud-Ouest — Pontlevoy",6,[["Pontlevoy","SAV",3,"Pontlevoy","SAV",2],["Pontlevoy","SAV",3,"Pontlevoy","PROD",2],["Pontlevoy","SAV",3,"Pontlevoy","SAV",2],["Pontlevoy","SAV",3,"Pontlevoy","PROD",2],["Pontlevoy","SAV",3,"Pontlevoy","SAV",2],["Pontlevoy","SAV",3,"Pontlevoy","PROD",2]],24,6],
+ ["T6","Sud-Ouest — PROD Pontlevoy / Valencisse",5,[["Pontlevoy","PROD",2,"Pontlevoy","PROD",2],["Valencisse","PROD",2,"Valencisse","PROD",2],["Pontlevoy","PROD",2,"Pontlevoy","PROD",2],["Valencisse","PROD",2,"Valencisse","PROD",2],["Pontlevoy","PROD",2,"Pontlevoy","PROD",2],null],0,20],
+ ["T7","Nord — Vendôme / Épiais",6,[["Vendôme","SAV",3,"Épiais","SAV",2],["Épiais","SAV",3,"Épiais","PROD",2],["Vendôme","SAV",3,"Épiais","SAV",2],["Épiais","SAV",3,"Épiais","PROD",2],["Vendôme","SAV",3,"Épiais","SAV",1],["Épiais","PROD",2,"Épiais","PROD",2]],20,8],
+ ["T8","Nord — Montoire / Cormenon",6,[["Montoire","PROD",2,"Montoire","PROD",2],["Montoire","SAV",3,"Cormenon","SAV",2],["Montoire","PROD",2,"Cormenon","PROD",2],["Montoire","SAV",3,"Cormenon","SAV",2],["Montoire","PROD",2,"Cormenon","PROD",2],["Montoire","SAV",2,"Cormenon","SAV",3]],15,12],
+ ["T9","Nord — PROD Vendômois / Beauce",5,[["Vendôme","PROD",2,"Épiais","PROD",2],["Vendôme","PROD",2,"Épiais","PROD",2],["Vendôme","PROD",2,"Épiais","PROD",2],["Vendôme","PROD",2,"Épiais","PROD",2],["Vendôme","PROD",2,"Épiais","PROD",2],null],0,20],
+ ["T10","Sologne Est — Crouy / Vouzon",6,[["Crouy-s-Cosson","SAV",3,"Crouy-s-Cosson","PROD",2],["Vouzon","SAV",3,"Vouzon","PROD",2],["Crouy-s-Cosson","SAV",3,"Crouy-s-Cosson","PROD",2],["Vouzon","SAV",2,"Vouzon","PROD",2],["Crouy-s-Cosson","SAV",2,"Crouy-s-Cosson","PROD",2],["Vouzon","SAV",2,"Vouzon","PROD",2]],15,12],
+ ["T11","Sologne Sud — Mur-de-Sologne",6,[["Mur-de-Sologne","SAV",3,"Mur-de-Sologne","PROD",2],["Romorantin","SAV",3,"La Ferté-Imb.","SAV",2],["Mur-de-Sologne","SAV",3,"Mur-de-Sologne","SAV",1],["Romorantin","SAV",2,"La Ferté-Imb.","SAV",1],["Mur-de-Sologne","SAV",3,"Mur-de-Sologne","PROD",2],["Romorantin","SAV",1,"La Ferté-Imb.","SAV",1]],20,4],
+ ["T12","Sologne — PROD",5,[["Romorantin","PROD",2,"Mur-de-Sologne","PROD",2],["Romorantin","PROD",2,"Mur-de-Sologne","PROD",2],["Romorantin","PROD",2,"Mur-de-Sologne","PROD",2],["Romorantin","PROD",2,"Mur-de-Sologne","PROD",2],["Romorantin","PROD",2,"Mur-de-Sologne","PROD",2],null],0,20],
+ ["T13","Sologne / Val de Loire — PROD",5,[["Crouy-s-Cosson","PROD",2,"Crouy-s-Cosson","PROD",2],["Mur-de-Sologne","PROD",2,"Romorantin","PROD",2],["Crouy-s-Cosson","PROD",2,"Crouy-s-Cosson","PROD",2],["Romorantin","PROD",2,"La Ferté-Imb.","PROD",2],["Vouzon","PROD",2,"Vouzon","PROD",2],null],0,20],
 ];
 document.getElementById('gridbody').innerHTML=G.map(([id,role,nj,days,sv,pr])=>{
   const cells=days.map(d=>{
@@ -407,12 +409,18 @@ document.getElementById('gridbody').innerHTML=G.map(([id,role,nj,days,sv,pr])=>{
 }).join('');
 
 const S=[
- ["Blois",5,"OK",6,"Quotidien",50,243],["Pontlevoy",5,"OK",3,"L-Me-V",9,89],
- ["Valencisse",2,"KO",3,"L-Me-V",6,44],["Vendôme",3,"OK",3,"L-Me-V",9,39],
- ["Épiais",3,"KO",3,"L-Me-V",6,51],["Montoire-sur-le-Loir",2,"KO",3,"Ma-J-S",9,48],
- ["Cormenon",1,"KO",3,"Ma-J-S",6,19],["Crouy-sur-Cosson",2,"KO",3,"L-Me-V",9,52],
- ["Vouzon",1,"KO",3,"Ma-J-S",9,33],["Mur-de-Sologne",2,"KO",3,"L-Me-V",9,49],
- ["Romorantin-Lanthenay",2,"KO",3,"Ma-J-S",9,44],["La Ferté-Imbault",2,"KO",3,"Ma-J-S",6,18],
+ ["Blois",5,"OK",6,"Quotidien",42,243],
+ ["Pontlevoy",5,"OK",6,"Quotidien",24,89],
+ ["Épiais",3,"KO",5,"Quotidien",11,51],
+ ["Mur-de-Sologne",2,"KO",3,"L-Me-V",10,49],
+ ["Vendôme",3,"OK",3,"L-Me-V",9,39],
+ ["Montoire-sur-le-Loir",2,"KO",3,"Ma-J-S",8,48],
+ ["Crouy-sur-Cosson",2,"KO",3,"L-Me-V",8,52],
+ ["Cormenon",1,"KO",3,"Ma-J-S",7,19],
+ ["Vouzon",1,"KO",3,"Ma-J-S",7,33],
+ ["Valencisse",2,"KO",3,"Ma-J-S",6,44],
+ ["Romorantin-Lanthenay",2,"KO",3,"Ma-J-S",6,44],
+ ["La Ferté-Imbault",2,"KO",3,"Ma-J-S",4,18],
 ];
 const dots=(n,max=6)=>'<span class="dots">'+Array.from({length:max},(_,i)=>
   `<span class="dot${i<n?'':' e'}"></span>`).join('')+'</span>';
@@ -438,11 +446,11 @@ document.getElementById('distmx').innerHTML=
    const d=km(a,b); return `<td class="${d<=30?'d1':d<=50?'d2':'d3'}">${d}</td>`;}).join('')+'</tr>').join('')+'</tbody>';
 
 const L=[["1","Rythme L-Me-V / Ma-J-S","Trois passages hebdomadaires par secteur au lieu de un ou deux.","J+1/J+2 tenu sur 12 secteurs au lieu de 3","free"],
- ["2","Bascule J-1 des créneaux SAV","Tout créneau SAV non vendu à J-1 18 h est rempli par une PROD du carnet J+5/J+7.","≈ 40 interventions PROD récupérées/sem.","free"],
+ ["2","Bascule J-1 des créneaux SAV","Tout créneau SAV non vendu à J-1 18 h est rempli par une PROD du carnet J+5/J+7.","Amortit les jours creux · 5 PROD/sem.","free"],
  ["3","Journées mixtes SAV + PROD","L'après-midi se fait dans le secteur du SAV du matin : plus de trajet inter-secteur.","Cadence PROD 4 → 5 sur ces demi-journées","free"],
  ["4","Samedi des 5 techniciens à 6 jours","Les affecter aux secteurs du rythme Mardi-Jeudi-Samedi.","Couvre les appels du jeudi et du vendredi","free"],
  ["5","Recomposition géographique","Cormenon rattaché au Nord et non à la Sologne Est.","Enchaînement le plus long : 46 → 30 km","free"],
- ["6","Renfort d'effectif","Deux techniciens : nécessaire dès que le SAV réel dépasse 78/semaine, donc dès aujourd'hui si la cible est bien 142.","+10 jours-tech/sem. ≈ 56 interventions SAV","paid"]];
+ ["6","Renfort d'effectif","Deux techniciens, et deux passages de 5 à 6 jours : seul levier qui comble les 11,3 jours-tech manquants.","+12 jours-tech/sem. = besoin SAV servi en entier","paid"]];
 document.getElementById('levers').innerHTML=L.map(([i,t,d,g,c])=>
  `<div class="card"><div class="h"><span class="i">${i}</span><span class="t">${t}</span></div>
   <p>${d}</p><div class="g ${c==='paid'?'paid':''}">${g} · ${c==='paid'?'2 salaires':'coût nul'}</div></div>`).join('');
