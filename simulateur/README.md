@@ -125,11 +125,30 @@ Elles sont affichées en tête de l'application et doivent le rester.
 - Le samedi coûte environ 4 % de kilomètres de plus. Il se justifie par le lissage de
   charge et le délai client, pas par l'économie de trajets.
 
+## Les trois onglets
+
+**Dimensionnement** — réglages, indicateurs, tableau des secteurs avec créneaux et
+jours de passage modifiables, quatre graphiques, liste des alertes.
+
+**Grille par technicien** — glisser-déposer entre une réserve de créneaux et les cases
+technicien/jour. Les règles sont contrôlées à chaque dépôt : capacité, secteurs par
+journée, distance d'enchaînement, régime du technicien. Les cases en infraction sont
+marquées et le motif exact listé. Le bouton *Proposer une répartition* appelle le
+solveur glouton ; ce qu'il ne place pas reste visible dans la réserve.
+
+**Import** — lecture du classeur de suivi, rapprochement des libellés GRDV insensible
+aux accents, rapport d'écart secteur par secteur avant application. Les secteurs
+inconnus du référentiel sont signalés, jamais devinés : sans coordonnées ni zone ils ne
+peuvent pas entrer dans un calcul de distances.
+
+## Déploiement
+
+Voir `DEPLOIEMENT.md`. La table Postgres est créée ; restent le rattachement du dépôt à
+Vercel et les deux variables d'environnement.
+
 ## Reste à faire
 
-- Glisser-déposer sur la grille par technicien — le validateur est prêt, l'interface
-  ne l'est pas.
-- Import du classeur de suivi depuis l'application, export du classeur de restitution.
+- Export du classeur de restitution depuis l'application.
 - Comparaison de plusieurs scénarios côte à côte.
-- Départements 37, 44 et 49.
-- Fournisseur de distances réelles.
+- Départements 37, 44 et 49 — un fichier de données par département, aucun code.
+- Fournisseur de distances réelles à la place de l'approximation géométrique.
