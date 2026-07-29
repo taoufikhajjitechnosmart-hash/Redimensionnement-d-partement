@@ -1,0 +1,521 @@
+:root {
+  --encre: #141c23;
+  --encre-2: #4d5d6a;
+  --encre-3: #8a95a0;
+  --fond: #ffffff;
+  --surface: #f7f9fa;
+  --surface-2: #eef1f3;
+  --bord: #dde3e7;
+  --primaire: #2a78d6;
+  --primaire-doux: #e8f0fb;
+  --accent: #eb6834;
+  --accent-doux: #fdeee7;
+  --bon: #0ca30c;
+  --bon-doux: #e7f6e7;
+  --alerte: #d03b3b;
+  --alerte-doux: #fbeaea;
+  --attention: #c08a10;
+  --attention-doux: #fdf4e0;
+  --rayon: 8px;
+  --ombre: 0 1px 2px rgba(20, 28, 35, 0.06), 0 2px 8px rgba(20, 28, 35, 0.04);
+  --mono: ui-monospace, 'SFMono-Regular', 'DejaVu Sans Mono', monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --encre: #e9eef1;
+    --encre-2: #a4b1bb;
+    --encre-3: #71808c;
+    --fond: #12181d;
+    --surface: #192127;
+    --surface-2: #212b33;
+    --bord: #2d3941;
+    --primaire: #5b9bea;
+    --primaire-doux: #1b2b3f;
+    --accent: #f4885a;
+    --accent-doux: #3a251c;
+    --bon: #3cc23c;
+    --bon-doux: #17301a;
+    --alerte: #ec6a6a;
+    --alerte-doux: #3a2020;
+    --attention: #e0aa38;
+    --attention-doux: #35291028;
+    --ombre: 0 1px 2px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--fond);
+  color: var(--encre);
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  line-height: 1.25;
+  letter-spacing: -0.011em;
+}
+
+h1 {
+  font-size: 20px;
+  font-weight: 650;
+}
+
+h2 {
+  font-size: 15px;
+  font-weight: 640;
+}
+
+h3 {
+  font-size: 13px;
+  font-weight: 620;
+}
+
+button,
+input,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+.page {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 24px 20px 72px;
+}
+
+.entete {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: baseline;
+  justify-content: space-between;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--bord);
+  margin-bottom: 20px;
+}
+
+.sous-titre {
+  color: var(--encre-3);
+  font-size: 12.5px;
+}
+
+.carte {
+  background: var(--surface);
+  border: 1px solid var(--bord);
+  border-radius: var(--rayon);
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.carte > h2 {
+  margin-bottom: 12px;
+}
+
+/* ── Bandeau d'avertissement ───────────────────────────────── */
+.reserve {
+  display: flex;
+  gap: 10px;
+  background: var(--attention-doux);
+  border: 1px solid var(--attention);
+  border-radius: var(--rayon);
+  padding: 12px 14px;
+  margin-bottom: 16px;
+  font-size: 12.5px;
+  line-height: 1.55;
+}
+
+.reserve b {
+  font-weight: 640;
+}
+
+.reserve-icone {
+  flex: none;
+  color: var(--attention);
+  font-weight: 700;
+}
+
+/* ── Réglages ──────────────────────────────────────────────── */
+.reglages {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(168px, 1fr));
+  gap: 12px 16px;
+}
+
+.champ {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.champ > label {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--encre-2);
+  letter-spacing: 0.01em;
+}
+
+.champ > select,
+.champ > input {
+  background: var(--fond);
+  border: 1px solid var(--bord);
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-size: 13px;
+  min-width: 0;
+}
+
+.champ > select:focus-visible,
+.champ > input:focus-visible {
+  outline: 2px solid var(--primaire);
+  outline-offset: -1px;
+}
+
+.aide {
+  font-size: 11px;
+  color: var(--encre-3);
+}
+
+/* ── Indicateurs ───────────────────────────────────────────── */
+.indicateurs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(148px, 1fr));
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.indicateur {
+  background: var(--surface);
+  border: 1px solid var(--bord);
+  border-radius: var(--rayon);
+  padding: 12px 14px;
+}
+
+.indicateur-libelle {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--encre-3);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.indicateur-valeur {
+  font-family: var(--mono);
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-top: 2px;
+  font-variant-numeric: tabular-nums;
+}
+
+.indicateur-detail {
+  font-size: 11.5px;
+  color: var(--encre-3);
+}
+
+.est-bon {
+  color: var(--bon);
+}
+
+.est-alerte {
+  color: var(--alerte);
+}
+
+.est-attention {
+  color: var(--attention);
+}
+
+/* ── Tableau des secteurs ──────────────────────────────────── */
+.enveloppe-table {
+  overflow-x: auto;
+  border: 1px solid var(--bord);
+  border-radius: var(--rayon);
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 880px;
+  font-size: 12.5px;
+}
+
+thead th {
+  background: var(--surface-2);
+  text-align: left;
+  font-size: 10.5px;
+  font-weight: 650;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--encre-2);
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--bord);
+  white-space: nowrap;
+}
+
+tbody td {
+  padding: 7px 10px;
+  border-bottom: 1px solid var(--bord);
+  vertical-align: middle;
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+tbody tr:hover {
+  background: var(--surface);
+}
+
+.num {
+  font-family: var(--mono);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.nom-secteur {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.zone-puce {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 650;
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: var(--surface-2);
+  color: var(--encre-2);
+  margin-left: 6px;
+}
+
+.saisie-creneaux {
+  width: 62px;
+  text-align: right;
+  font-family: var(--mono);
+  background: var(--fond);
+  border: 1px solid var(--bord);
+  border-radius: 5px;
+  padding: 3px 6px;
+}
+
+/* ── Sélecteur de jours ────────────────────────────────────── */
+.jours {
+  display: flex;
+  gap: 3px;
+}
+
+.jour {
+  width: 26px;
+  height: 24px;
+  border: 1px solid var(--bord);
+  border-radius: 5px;
+  background: var(--fond);
+  color: var(--encre-3);
+  font-size: 11px;
+  font-weight: 620;
+  cursor: pointer;
+  padding: 0;
+}
+
+.jour:hover:not(:disabled) {
+  border-color: var(--primaire);
+}
+
+.jour[aria-pressed='true'] {
+  background: var(--primaire);
+  border-color: var(--primaire);
+  color: #fff;
+}
+
+.jour:disabled {
+  opacity: 0.32;
+  cursor: not-allowed;
+}
+
+.jour:focus-visible {
+  outline: 2px solid var(--primaire);
+  outline-offset: 1px;
+}
+
+/* ── Étiquettes d'état ─────────────────────────────────────── */
+.etat {
+  display: inline-block;
+  font-size: 10.5px;
+  font-weight: 650;
+  padding: 2px 7px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.etat-bon {
+  background: var(--bon-doux);
+  color: var(--bon);
+}
+
+.etat-alerte {
+  background: var(--alerte-doux);
+  color: var(--alerte);
+}
+
+.etat-attention {
+  background: var(--attention-doux);
+  color: var(--attention);
+}
+
+/* ── Graphiques ────────────────────────────────────────────── */
+.graphiques {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+.barres {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.barre-ligne {
+  display: grid;
+  grid-template-columns: 128px 1fr 58px;
+  align-items: center;
+  gap: 8px;
+}
+
+.barre-libelle {
+  font-size: 11.5px;
+  color: var(--encre-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.barre-piste {
+  position: relative;
+  height: 16px;
+  background: var(--surface-2);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.barre-remplissage {
+  display: block;
+  height: 100%;
+  min-width: 2px;
+  border-radius: 4px;
+  transition: width 140ms ease-out;
+}
+
+.barre-seuil {
+  position: absolute;
+  top: -2px;
+  bottom: -2px;
+  width: 1.5px;
+  background: var(--encre);
+  opacity: 0.55;
+}
+
+.barre-valeur {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.legende {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 10px;
+  font-size: 11px;
+  color: var(--encre-2);
+}
+
+.legende-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.legende-pastille {
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+}
+
+/* ── Barre d'actions ───────────────────────────────────────── */
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.bouton {
+  background: var(--fond);
+  border: 1px solid var(--bord);
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 12.5px;
+  font-weight: 580;
+  cursor: pointer;
+}
+
+.bouton:hover:not(:disabled) {
+  border-color: var(--primaire);
+  color: var(--primaire);
+}
+
+.bouton:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.bouton-primaire {
+  background: var(--primaire);
+  border-color: var(--primaire);
+  color: #fff;
+}
+
+.bouton-primaire:hover:not(:disabled) {
+  filter: brightness(1.08);
+  color: #fff;
+}
+
+.message {
+  font-size: 12px;
+  color: var(--encre-2);
+}
+
+.liste-alertes {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 12.5px;
+  line-height: 1.6;
+}
+
+.liste-alertes li::marker {
+  color: var(--alerte);
+}
+
+.vide {
+  color: var(--encre-3);
+  font-size: 12.5px;
+  font-style: italic;
+}

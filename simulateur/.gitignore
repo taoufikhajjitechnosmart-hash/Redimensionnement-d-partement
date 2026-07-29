@@ -1,0 +1,6 @@
+node_modules/
+.next/
+.donnees/
+*.tsbuildinfo
+.env
+.env.local

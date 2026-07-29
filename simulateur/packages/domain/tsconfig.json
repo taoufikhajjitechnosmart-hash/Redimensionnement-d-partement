@@ -1,0 +1,5 @@
+{
+  "extends": "../engine/tsconfig.json",
+  "compilerOptions": { "types": [] },
+  "include": ["src"]
+}
