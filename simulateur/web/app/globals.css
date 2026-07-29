@@ -519,3 +519,184 @@ tbody tr:hover {
   font-size: 12.5px;
   font-style: italic;
 }
+
+/* ── Onglets ───────────────────────────────────────────────── */
+.onglets {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--bord);
+  margin-bottom: 16px;
+}
+
+.onglet {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--encre-3);
+  cursor: pointer;
+  margin-bottom: -1px;
+}
+
+.onglet:hover {
+  color: var(--encre);
+}
+
+.onglet[aria-selected='true'] {
+  color: var(--primaire);
+  border-bottom-color: var(--primaire);
+}
+
+.onglet:focus-visible {
+  outline: 2px solid var(--primaire);
+  outline-offset: -2px;
+}
+
+.entete-carte {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.entete-carte > h2 {
+  margin-bottom: 0;
+}
+
+/* ── Grille par technicien ─────────────────────────────────── */
+table.grille {
+  min-width: 940px;
+}
+
+table.grille td {
+  vertical-align: top;
+}
+
+.cellule-tech {
+  min-width: 172px;
+}
+
+.cellule-tech .nom-secteur {
+  display: block;
+}
+
+.meta-tech {
+  display: block;
+  font-size: 10.5px;
+  color: var(--encre-3);
+}
+
+.case-jour {
+  min-width: 128px;
+  min-height: 62px;
+  background: var(--fond);
+  border-left: 1px solid var(--bord);
+  /* Marge basse réservée au compteur, qui est en position absolue. */
+  padding: 4px 5px 16px;
+  position: relative;
+}
+
+.case-survol {
+  background: var(--primaire-doux);
+  box-shadow: inset 0 0 0 2px var(--primaire);
+}
+
+.case-infraction {
+  background: var(--alerte-doux);
+  box-shadow: inset 0 0 0 1px var(--alerte);
+}
+
+.case-repos {
+  background: var(--surface-2);
+}
+
+.repos {
+  font-size: 10.5px;
+  color: var(--encre-3);
+  font-style: italic;
+}
+
+.vacation,
+.jeton {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  background: var(--primaire-doux);
+  color: var(--primaire);
+  border: 1px solid var(--primaire);
+  border-radius: 5px;
+  padding: 2px 4px 2px 6px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: grab;
+  margin: 0 3px 3px 0;
+  max-width: 100%;
+}
+
+.vacation:active,
+.jeton:active {
+  cursor: grabbing;
+}
+
+.jeton {
+  background: var(--accent-doux);
+  color: var(--accent);
+  border-color: var(--accent);
+  padding: 3px 8px;
+}
+
+.vacation b,
+.jeton b {
+  font-family: var(--mono);
+  font-weight: 700;
+}
+
+.retirer {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 1;
+  padding: 0 1px;
+  opacity: 0.6;
+}
+
+.retirer:hover {
+  opacity: 1;
+}
+
+.total-case {
+  position: absolute;
+  right: 5px;
+  bottom: 3px;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--encre-3);
+}
+
+.reserve-jours {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(148px, 1fr));
+  gap: 12px;
+}
+
+.colonne-jour {
+  background: var(--fond);
+  border: 1px solid var(--bord);
+  border-radius: 6px;
+  padding: 8px;
+  min-height: 76px;
+}
+
+.colonne-jour > h3 {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--encre-2);
+  margin-bottom: 6px;
+}

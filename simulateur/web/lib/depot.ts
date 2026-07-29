@@ -1,5 +1,6 @@
 import { mkdir, readFile, readdir, unlink, writeFile } from 'node:fs/promises';
 import path from 'node:path';
+import { depotSupabase } from './depot-supabase';
 import {
   migrerScenario,
   scenarioEnregistreSchema,
@@ -65,7 +66,20 @@ export function depotFichier(): DepotScenarios {
     },
 
     async enregistrer(scenario, note) {
-      await mkdir(RACINE, { recursive: true });
+      try {
+        await mkdir(RACINE, { recursive: true });
+      } catch (erreur) {
+        const code = (erreur as NodeJS.ErrnoException).code;
+        // Hébergement sans disque inscriptible : le dire clairement plutôt que
+        // de laisser remonter un EROFS incompréhensible.
+        if (code === 'EROFS' || code === 'EACCES' || code === 'EPERM') {
+          throw new Error(
+            "Ce serveur n'a pas de disque inscriptible : renseignez SUPABASE_URL et " +
+              'SUPABASE_SERVICE_ROLE_KEY pour enregistrer les scénarios en base.',
+          );
+        }
+        throw erreur;
+      }
       const existant = await this.lire(scenario.id);
       const maintenant = new Date().toISOString();
       const enregistre = scenarioEnregistreSchema.parse({
@@ -98,8 +112,24 @@ export function depotFichier(): DepotScenarios {
 
 let instance: DepotScenarios | undefined;
 
-/** Dépôt courant. Point unique à modifier pour changer de mode de stockage. */
+/**
+ * Dépôt courant.
+ *
+ * Postgres dès que `SUPABASE_URL` et `SUPABASE_SERVICE_ROLE_KEY` sont présentes,
+ * fichiers JSON sinon. Le repli permet de travailler en local sans base et fait
+ * que l'application démarre même mal configurée, plutôt que d'échouer au
+ * chargement.
+ */
 export function depot(): DepotScenarios {
-  instance ??= depotFichier();
+  if (instance) return instance;
+
+  const url = process.env.SUPABASE_URL;
+  const cle = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  instance = url && cle ? depotSupabase(url, cle) : depotFichier();
   return instance;
+}
+
+/** Mode de stockage effectif, affiché dans l'interface. */
+export function modeStockage(): 'postgres' | 'fichier' {
+  return process.env.SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY ? 'postgres' : 'fichier';
 }

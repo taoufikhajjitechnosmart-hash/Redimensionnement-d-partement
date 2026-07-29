@@ -3,6 +3,7 @@ import { REFERENTIEL_41 } from './dept41';
 
 export * from './dept41';
 export * from './scenarios41';
+export * from './techniciens41';
 
 /**
  * Référentiels disponibles, indexés par code département.

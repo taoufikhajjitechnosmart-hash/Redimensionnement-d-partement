@@ -28,10 +28,11 @@ const pourcent = (x: number, decimales = 0): string =>
 interface Props {
   readonly referentiel: Referentiel;
   readonly preregles: readonly Scenario[];
+  readonly scenario: Scenario;
+  readonly setScenario: React.Dispatch<React.SetStateAction<Scenario>>;
 }
 
-export function Simulateur({ referentiel, preregles }: Props) {
-  const [scenario, setScenario] = useState<Scenario>(() => ({ ...preregles[0]! }));
+export function Simulateur({ referentiel, preregles, scenario, setScenario }: Props) {
   const [message, setMessage] = useState<string | null>(null);
   const [enregistrement, setEnregistrement] = useState(false);
 
@@ -43,20 +44,26 @@ export function Simulateur({ referentiel, preregles }: Props) {
     }
   }, [scenario, referentiel]);
 
-  const modifier = useCallback((maj: Partial<Scenario>) => {
-    setScenario((s) => ({ ...s, ...maj }));
-    setMessage(null);
-  }, []);
+  const modifier = useCallback(
+    (maj: Partial<Scenario>) => {
+      setScenario((s) => ({ ...s, ...maj }));
+      setMessage(null);
+    },
+    [setScenario],
+  );
 
   /** Change de régime en retirant les samedis devenus impossibles. */
-  const changerRegime = useCallback((regime: Regime) => {
-    setScenario((s) => ({
-      ...s,
-      regime,
-      offres: s.offres.map((o) => ({ ...o, jours: o.jours.filter((j) => j < regime) })),
-    }));
-    setMessage(null);
-  }, []);
+  const changerRegime = useCallback(
+    (regime: Regime) => {
+      setScenario((s) => ({
+        ...s,
+        regime,
+        offres: s.offres.map((o) => ({ ...o, jours: o.jours.filter((j) => j < regime) })),
+      }));
+      setMessage(null);
+    },
+    [setScenario],
+  );
 
   const basculerJour = useCallback((secteurId: string, jour: Jour) => {
     setScenario((s) => ({
@@ -73,7 +80,7 @@ export function Simulateur({ referentiel, preregles }: Props) {
       ),
     }));
     setMessage(null);
-  }, []);
+  }, [setScenario]);
 
   const changerCreneaux = useCallback((secteurId: string, creneaux: number) => {
     setScenario((s) => ({
@@ -83,7 +90,7 @@ export function Simulateur({ referentiel, preregles }: Props) {
       ),
     }));
     setMessage(null);
-  }, []);
+  }, [setScenario]);
 
   const chargerPrereglage = useCallback(
     (id: string) => {
@@ -93,7 +100,7 @@ export function Simulateur({ referentiel, preregles }: Props) {
         setMessage(null);
       }
     },
-    [preregles],
+    [preregles, setScenario],
   );
 
   const enregistrer = useCallback(async () => {
