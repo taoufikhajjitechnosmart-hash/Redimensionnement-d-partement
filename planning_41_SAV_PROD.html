@@ -105,7 +105,8 @@
   .half{display:flex; flex-direction:column; height:100%}
   .hb{flex:1; padding:6px 7px; display:flex; flex-direction:column; gap:1px; min-height:34px; justify-content:center}
   .hb + .hb{border-top:1px dashed var(--rule-2)}
-  .hb.sav{background:var(--sav-bg)} .hb.prod{background:var(--prod-bg)}
+  .hb.sav{background:var(--sav-bg)} .hb.prod{background:var(--prod-bg)} .hb.mix{background:var(--surface-2)}
+  .hb.mix .s,.hb.mix .c{color:var(--ink-2)}
   .hb .s{font-size:11.5px; font-weight:650; line-height:1.2; letter-spacing:-.01em}
   .hb.sav .s{color:var(--sav-ink)} .hb.prod .s{color:var(--prod-ink)}
   .hb .c{font-family:ui-monospace,monospace; font-size:9.5px; letter-spacing:.06em; opacity:.85}
@@ -195,24 +196,24 @@
 <header>
   <div class="eyebrow">
     <span>Département 41 · Loir-et-Cher</span><span>12 secteurs GRDV · 59 NRO</span>
-    <span>13 techniciens requis (11 aujourd'hui)</span><span>Source : suivi_volumes_PROD_72.xlsx — MAJ 28/07/2026</span>
+    <span>11 techniciens</span><span>Source : suivi_volumes_PROD_72.xlsx — MAJ 28/07/2026</span>
   </div>
   <h1>Libérer de la disponibilité :<br>SAV à J+1/J+2, PROD à J+5/J+7</h1>
-  <p class="lede">Le volume PROD du fichier est majoré de 10 %. Le principe retenu : la tournée est figée
-     (technicien × jour × secteur), seul le partage SAV / PROD à l'intérieur de la journée est variable.
-     Présence comptée à 100 %, samedi travaillé par les techniciens à 6 jours.</p>
+  <p class="lede">8 créneaux par technicien et par jour, un créneau étant un créneau quelle que soit la nature de
+     l'intervention. Le SAV impose où et quand il faut être ; la PROD se place dans tout ce qui reste.
+     Objectif : ne jamais dépasser 75 % d'occupation, le quart restant <em>étant</em> la disponibilité.</p>
 </header>
 
 <section>
   <div class="stats">
-    <div class="stat"><span class="k">Capacité requise</span><span class="v">72,0</span>
-      <span class="n">jours-technicien / semaine<br>7 techs × 6 j + 6 techs × 5 j</span></div>
-    <div class="stat"><span class="k">Charge PROD +10 %</span><span class="v">46,3</span>
-      <span class="n">jours-tech / sem., soit 185 interventions</span></div>
-    <div class="stat"><span class="k">Besoin SAV mesuré</span><span class="v">142</span>
-      <span class="n">interventions / sem. — <b>615 / mois</b><br>calculées sur votre planning hebdo</span></div>
-    <div class="stat lo"><span class="k">Écart à 11 techniciens</span><span class="v">−2,1</span>
-      <span class="n">ETP — soit 11,3 jours-tech / sem. manquants</span></div>
+    <div class="stat"><span class="k">Capacité</span><span class="v">480</span>
+      <span class="n">créneaux / semaine<br>60 j-tech × 8 créneaux</span></div>
+    <div class="stat"><span class="k">À ouvrir</span><span class="v">436</span>
+      <span class="n">créneaux / semaine<br>327 interventions à 75 % d'occupation</span></div>
+    <div class="stat"><span class="k">Réserve</span><span class="v">44</span>
+      <span class="n">créneaux, soit <b>5,5 jours-technicien</b><br>1 technicien de marge</span></div>
+    <div class="stat lo"><span class="k">Demande</span><span class="v">327</span>
+      <span class="n">interventions / sem.<br>185 PROD (+10 %) + 142 SAV</span></div>
     <div class="stat hi"><span class="k">Grille proposée</span><span class="v">12<span style="font-size:17px">/12</span></span>
       <span class="n">secteurs tenant le J+1/J+2<br>contre 3/12 aujourd'hui</span></div>
   </div>
@@ -228,12 +229,13 @@
        sans créneau à J+1 ni J+2.</p>
   </div>
   <div class="callout">
-    <span class="t">Le volume SAV, calculé sur votre planning : 142 interventions par semaine</span>
-    <p>J'ai additionné les créneaux de votre planning hebdomadaire : <b>142 par semaine, soit 615 par mois</b>,
-       pour 25 jours-technicien. Ajoutés aux <b>46,3 jours-technicien</b> de PROD majorée de 10 %, cela fait
-       <b>71,3 jours-technicien par semaine</b> — alors que 11 techniciens en produisent 60.
-       L'écart est structurel : <b>il manque 2,1 ETP</b>. Aucune réorganisation ne les crée ;
-       la grille ci-dessous est calée sur <b>13 techniciens, dont 7 à 6 jours</b>.</p>
+    <span class="t">Deux passages par semaine ne suffisent jamais — c'est démontrable</span>
+    <p>J'ai énuméré toutes les combinaisons possibles de jours de passage. Sur une semaine de 6 jours,
+       <b>aucune paire de jours</b> ne permet de trouver un créneau à J+1 ou J+2 quel que soit le jour d'appel.
+       Et parmi les 20 combinaisons de 3 jours, <b>seules deux fonctionnent : Lundi-Mercredi-Vendredi et
+       Mardi-Jeudi-Samedi</b> — qui se trouvent être exactement complémentaires. C'est la raison mathématique
+       pour laquelle votre grille actuelle ne tient le délai que sur 3 secteurs sur 12 : Cormenon et Vouzon
+       n'ont qu'un seul passage, six autres secteurs n'en ont que deux.</p>
   </div>
   <div class="callout good">
     <span class="t">Le correctif ne coûte rien : trois passages par semaine, en quinconce</span>
@@ -249,7 +251,8 @@
   <p class="note">Chaque case est coupée en deux : <strong>matin</strong> au-dessus, <strong>après-midi</strong> en dessous.
      Cadences retenues — Blois 7 créneaux/jour, secteurs ruraux 5 (matin 3 + après-midi 2), PROD 4 interventions/jour.</p>
   <div class="legend">
-    <span class="chip"><span class="sw sav"></span>Créneaux SAV réservés — ouverts à la prise de RDV J+1/J+2</span>
+    <span class="chip"><span class="sw sav"></span>Demi-journée SAV</span>
+    <span class="chip"><span class="sw" style="background:var(--surface-2)"></span>Demi-journée mixte SAV + PROD</span>
     <span class="chip"><span class="sw prod"></span>PROD pré-affectée depuis le carnet J+5/J+7</span>
     <span class="chip" style="color:var(--warn);font-weight:650">6 j — les 7 techniciens travaillant le samedi</span>
   </div>
@@ -261,16 +264,16 @@
     </tr></thead>
     <tbody id="gridbody"></tbody>
     <tfoot><tr>
-      <td>TOTAL — 72 jours-technicien</td><td colspan="6" style="text-align:center">12 secteurs couverts · 3 passages minimum chacun</td>
-      <td style="text-align:center">142</td><td style="text-align:center">180</td>
+      <td>TOTAL — 60 j-tech · 480 créneaux</td><td colspan="6" style="text-align:center">12 secteurs · 3 passages minimum chacun · rythmes L-Me-V et Ma-J-S</td>
+      <td style="text-align:center">168</td><td style="text-align:center">312</td>
     </tr></tfoot>
   </table>
   </div>
-  <p class="note">Elle sert <strong>exactement les 142 interventions SAV attendues</strong>, secteur par secteur, et
-     <strong>180 interventions PROD en direct</strong> sur les 185 nécessaires — les 5 manquantes passent par la bascule
-     décrite ci-dessous. Charge réelle : 67 jours-technicien consommés sur 72, soit <strong>5 jours-technicien de
-     marge</strong> pour les aléas. T1, le technicien 100 % SAV, reste sur Blois et Valencisse comme vous l'avez
-     demandé : 11 km entre les deux hubs.</p>
+  <p class="note">Elle réserve <strong>168 créneaux SAV</strong> pour 142 interventions attendues, et ouvre
+     <strong>312 créneaux PROD</strong> pour 185 interventions. Sur chaque secteur, la réservation SAV couvre la
+     demande et la capacité PROD aussi — aucun des douze n'est en défaut. T1, le technicien 100 % SAV, reste sur
+     Blois et Valencisse comme vous l'avez demandé : 11 km entre les deux hubs. T11 est le renfort flottant,
+     réaffecté chaque vendredi au secteur dont le carnet est le plus tendu.</p>
 </section>
 
 <section>
@@ -289,11 +292,11 @@
     <li><span class="when">Hebdo</span><p>Si le remplissage SAV d'un secteur dépasse le seuil 4 semaines de suite, augmenter sa réservation. Le curseur suit la demande réelle.</p></li>
   </ol>
   <div class="callout">
-    <span class="t">À 13 techniciens, la bascule redevient un simple amortisseur</span>
-    <p>La grille couvre la totalité du besoin SAV : les créneaux sont calés sur le volume réel, pas surréservés.
-       La bascule J-1 ne sert plus à financer le SAV mais à <b>récupérer les 5 interventions PROD</b> qui manquent
-       chaque semaine et à absorber les jours creux. Si vous restez à 11 techniciens, elle redevient vitale :
-       elle ne permet alors de servir que <b>78 des 142 interventions SAV</b>, soit 55 % du besoin.</p>
+    <span class="t">Le quart de créneaux libres n'est pas du gaspillage, c'est le produit</span>
+    <p>Occuper 75 % des créneaux, c'est en laisser 109 ouverts chaque semaine. Sans eux, aucun client ne trouve
+       de place à J+1 ou J+2 : la disponibilité <b>est</b> ce quart. Et elle ne coûte presque rien, parce que
+       la bascule J-1 récupère les créneaux SAV non vendus pour y poser de la PROD tirée du carnet J+5/J+7.
+       Le seul vrai coût est la réserve de 44 créneaux, soit un technicien.</p>
   </div>
 </section>
 
@@ -304,7 +307,7 @@
     <thead><tr>
       <th>Secteur</th><th class="c">Passages actuels</th><th class="c">Délai actuel</th>
       <th class="c">Passages proposés</th><th>Rythme</th><th class="c">Délai proposé</th>
-      <th class="n">SAV/sem (mesuré)</th><th class="n">PROD/mois</th>
+      <th class="n">Créneaux/sem</th><th class="n">SAV ouvert / demandé</th><th class="n">PROD ouverte / demandée</th>
     </tr></thead>
     <tbody id="sectorbody"></tbody>
   </table>
@@ -340,36 +343,37 @@
 
 <section>
   <h2><span class="num">07</span>Hypothèses retenues et questions ouvertes</h2>
-  <p class="note">Ce que vous avez confirmé : samedi travaillé par les techniciens à 6 jours · présence comptée
-     à 100 %, les absences étant couvertes · 10 techniciens polyvalents et 1 dédié 100 % SAV sur Blois et Valencisse ·
-     un « cr » est une intervention. Le volume SAV n'est donc plus une hypothèse : il est calculé sur votre planning.</p>
+  <p class="note">Réglé au fil de nos échanges : périmètre 41 seul · samedi travaillé par les 5 techniciens à
+     6 jours · 1 technicien 100 % SAV sur Blois et Valencisse, 10 polyvalents · un créneau est un créneau,
+     8 par technicien et par jour · cible 436 créneaux ouverts pour 75 % d'occupation.</p>
   <ol class="qs">
-    <li><div><div class="qt">Que recouvre exactement l'« objectif dispo 75 % » du titre de votre planning ?</div>
-      <div class="qw">C'est la dernière ambiguïté sur le volume. Si les 142 créneaux doivent tous être servis,
-      il faut 13 techniciens. Si l'objectif est qu'un client trouve un créneau dans 75 % des cas — donc environ
-      107 interventions réellement posées — <b>12 techniciens suffisent</b>. Un salaire d'écart.</div></div></li>
-    <li><div><div class="qt">Validez-vous le passage à 13 techniciens, dont 7 à 6 jours ?</div>
-      <div class="qw">Cela suppose 2 recrutements et 2 passages de 5 à 6 jours. Sinon, à 11 techniciens,
-      je peux tenir le J+1/J+2 sur les 12 secteurs mais seulement pour 78 des 142 interventions attendues :
-      il faudra arbitrer quels secteurs sont servis en priorité.</div></div></li>
+    <li><div><div class="qt">8 créneaux par jour, est-ce tenable sur le terrain ?</div>
+      <div class="qw">C'est l'hypothèse qui fait tenir tout le reste. Votre planning SAV actuel tourne à
+      5,68 créneaux par technicien et par jour, avec des journées affichées à 7 sur Blois et 5 en rural :
+      passer à 8 représente <b>+41 %</b>. Si le réel plafonne à 7, la capacité tombe à 420 créneaux et il
+      manque 16 créneaux pour atteindre 436.</div></div></li>
+    <li><div><div class="qt">La répartition des 436 créneaux entre secteurs vous convient-elle ?</div>
+      <div class="qw">Je l'ai faite au prorata de la demande totale de chaque secteur (SAV + PROD). Si un
+      secteur mérite plus de disponibilité que son volume ne le justifie — un NRO récent, un client sensible,
+      une zone à reprises fréquentes — dites-le et je décale la réservation.</div></div></li>
     <li><div><div class="qt">Où habitent les techniciens ?</div>
-      <div class="qw">J'ai proposé des bases (Blois, Vendôme, Pontlevoy, Romorantin, Crouy) déduites de la seule
-      géographie. Si les domiciles réels sont ailleurs, les clusters se réorganisent — c'est du temps de trajet
-      payé tous les jours, et cela peut coûter plus qu'un des enchaînements que j'ai optimisés.</div></div></li>
-    <li><div><div class="qt">La cadence de 4 interventions PROD par technicien et par jour est-elle la bonne ?</div>
-      <div class="qw">Je l'ai retrouvée dans votre fichier de volumes (règle vérifiée sur 256 lignes sur 263).
-      Si le réel est à 4,5, la charge PROD tombe de 46,3 à 41,1 jours-technicien et <b>12 techniciens suffisent</b>
-      même en servant les 142 interventions SAV.</div></div></li>
+      <div class="qw">J'ai proposé des bases (Blois, Vendôme, Romorantin, Crouy, Pontlevoy) déduites de la seule
+      géographie. Si les domiciles réels sont ailleurs, les binômes de secteurs se réorganisent — c'est du temps
+      de trajet payé tous les jours.</div></div></li>
+    <li><div><div class="qt">Comment voulez-vous piloter le renfort flottant (T11) ?</div>
+      <div class="qw">J'ai posé qu'il est réaffecté chaque vendredi pour la semaine suivante, au secteur dont le
+      carnet est le plus tendu. C'est 5 journées, soit toute votre marge : si vous préférez le figer sur Blois,
+      la réserve disparaît des autres secteurs.</div></div></li>
     <li><div><div class="qt">Le carnet PROD est-il assez fourni sur les petits secteurs pour alimenter la bascule ?</div>
-      <div class="qw">Cormenon fait 19 interventions PROD par mois, La Ferté-Imbault 18 : moins d'une par jour ouvré.
-      Si le carnet y est vide, un créneau SAV non vendu est perdu au lieu d'être recyclé.</div></div></li>
-    <li><div><div class="qt">Y a-t-il des engagements contractuels ou des pénalités sur le J+1/J+2 ?</div>
-      <div class="qw">Si oui, les 2 techniciens de renfort sont probablement moins chers que les pénalités,
-      et l'arbitrage se règle tout seul.</div></div></li>
+      <div class="qw">Cormenon fait 19 interventions PROD par mois, La Ferté-Imbault 18 : moins d'une par jour
+      ouvré. Si le carnet y est vide, un créneau SAV non vendu est perdu au lieu d'être recyclé en PROD.</div></div></li>
+    <li><div><div class="qt">Y a-t-il des pénalités contractuelles sur le J+1/J+2 ?</div>
+      <div class="qw">Si oui, le taux d'occupation cible doit être calé sur le pire cas et non sur la moyenne :
+      65 % au lieu de 75 % porterait la cible à 503 créneaux, donc au-delà de ce que 11 techniciens ouvrent.</div></div></li>
     <li><div><div class="qt">Les volumes PROD d'octobre sont-ils une prévision ou un historique ?</div>
       <div class="qw">J'ai retenu le mois le plus chargé entre octobre et mars, secteur par secteur. Si octobre
-      est une prévision haute qui ne se réalisera pas, la charge PROD baisse d'environ 3 jours-technicien
-      et le besoin en renfort se réduit d'autant.</div></div></li>
+      est une prévision haute qui ne se réalisera pas, la demande PROD baisse d'environ 20 interventions par
+      semaine et la réserve passe de 44 à près de 70 créneaux.</div></div></li>
   </ol>
 </section>
 
@@ -381,56 +385,55 @@
 
 <script>
 const G=[
- ["T1","100 % SAV — Blois + Valencisse",6,[["Blois","SAV",4,"Blois","SAV",3],["Blois","SAV",4,"Valencisse","SAV",2],["Blois","SAV",4,"Blois","SAV",3],["Blois","SAV",4,"Valencisse","SAV",2],["Blois","SAV",4,"Blois","SAV",3],["Blois","SAV",4,"Valencisse","SAV",2]],39,0],
- ["T2","Blois — mixte SAV / PROD",6,[["Blois","PROD",2,"Blois","SAV",3],["Blois","PROD",2,"Blois","PROD",2],["Blois","PROD",2,"Blois","SAV",3],["Blois","PROD",2,"Blois","PROD",2],["Blois","PROD",2,"Blois","SAV",3],["Blois","PROD",2,"Blois","PROD",2]],9,18],
- ["T3","Blois — PROD",5,[["Blois","PROD",2,"Blois","PROD",2],["Blois","PROD",2,"Blois","PROD",2],["Blois","PROD",2,"Blois","PROD",2],["Blois","PROD",2,"Blois","PROD",2],["Blois","PROD",2,"Blois","PROD",2],null],0,20],
- ["T4","Blois — PROD",5,[["Blois","PROD",2,"Blois","PROD",2],["Blois","PROD",2,"Blois","PROD",2],["Blois","PROD",2,"Blois","PROD",2],["Blois","PROD",2,"Blois","PROD",2],["Blois","PROD",2,"Blois","PROD",2],null],0,20],
- ["T5","Sud-Ouest — Pontlevoy",6,[["Pontlevoy","SAV",3,"Pontlevoy","SAV",2],["Pontlevoy","SAV",3,"Pontlevoy","PROD",2],["Pontlevoy","SAV",3,"Pontlevoy","SAV",2],["Pontlevoy","SAV",3,"Pontlevoy","PROD",2],["Pontlevoy","SAV",3,"Pontlevoy","SAV",2],["Pontlevoy","SAV",3,"Pontlevoy","PROD",2]],24,6],
- ["T6","Sud-Ouest — PROD Pontlevoy / Valencisse",5,[["Pontlevoy","PROD",2,"Pontlevoy","PROD",2],["Valencisse","PROD",2,"Valencisse","PROD",2],["Pontlevoy","PROD",2,"Pontlevoy","PROD",2],["Valencisse","PROD",2,"Valencisse","PROD",2],["Pontlevoy","PROD",2,"Pontlevoy","PROD",2],null],0,20],
- ["T7","Nord — Vendôme / Épiais",6,[["Vendôme","SAV",3,"Épiais","SAV",2],["Épiais","SAV",3,"Épiais","PROD",2],["Vendôme","SAV",3,"Épiais","SAV",2],["Épiais","SAV",3,"Épiais","PROD",2],["Vendôme","SAV",3,"Épiais","SAV",1],["Épiais","PROD",2,"Épiais","PROD",2]],20,8],
- ["T8","Nord — Montoire / Cormenon",6,[["Montoire","PROD",2,"Montoire","PROD",2],["Montoire","SAV",3,"Cormenon","SAV",2],["Montoire","PROD",2,"Cormenon","PROD",2],["Montoire","SAV",3,"Cormenon","SAV",2],["Montoire","PROD",2,"Cormenon","PROD",2],["Montoire","SAV",2,"Cormenon","SAV",3]],15,12],
- ["T9","Nord — PROD Vendômois / Beauce",5,[["Vendôme","PROD",2,"Épiais","PROD",2],["Vendôme","PROD",2,"Épiais","PROD",2],["Vendôme","PROD",2,"Épiais","PROD",2],["Vendôme","PROD",2,"Épiais","PROD",2],["Vendôme","PROD",2,"Épiais","PROD",2],null],0,20],
- ["T10","Sologne Est — Crouy / Vouzon",6,[["Crouy-s-Cosson","SAV",3,"Crouy-s-Cosson","PROD",2],["Vouzon","SAV",3,"Vouzon","PROD",2],["Crouy-s-Cosson","SAV",3,"Crouy-s-Cosson","PROD",2],["Vouzon","SAV",2,"Vouzon","PROD",2],["Crouy-s-Cosson","SAV",2,"Crouy-s-Cosson","PROD",2],["Vouzon","SAV",2,"Vouzon","PROD",2]],15,12],
- ["T11","Sologne Sud — Mur-de-Sologne",6,[["Mur-de-Sologne","SAV",3,"Mur-de-Sologne","PROD",2],["Romorantin","SAV",3,"La Ferté-Imb.","SAV",2],["Mur-de-Sologne","SAV",3,"Mur-de-Sologne","SAV",1],["Romorantin","SAV",2,"La Ferté-Imb.","SAV",1],["Mur-de-Sologne","SAV",3,"Mur-de-Sologne","PROD",2],["Romorantin","SAV",1,"La Ferté-Imb.","SAV",1]],20,4],
- ["T12","Sologne — PROD",5,[["Romorantin","PROD",2,"Mur-de-Sologne","PROD",2],["Romorantin","PROD",2,"Mur-de-Sologne","PROD",2],["Romorantin","PROD",2,"Mur-de-Sologne","PROD",2],["Romorantin","PROD",2,"Mur-de-Sologne","PROD",2],["Romorantin","PROD",2,"Mur-de-Sologne","PROD",2],null],0,20],
- ["T13","Sologne / Val de Loire — PROD",5,[["Crouy-s-Cosson","PROD",2,"Crouy-s-Cosson","PROD",2],["Mur-de-Sologne","PROD",2,"Romorantin","PROD",2],["Crouy-s-Cosson","PROD",2,"Crouy-s-Cosson","PROD",2],["Romorantin","PROD",2,"La Ferté-Imb.","PROD",2],["Vouzon","PROD",2,"Vouzon","PROD",2],null],0,20],
+ ["T1","100 % SAV — Blois (L-Me-V) · Valencisse (Ma-J-S)",6,[["Blois",4,0,"Blois",4,0],["Valencisse",3,1,"Valencisse",0,4],["Blois",4,0,"Blois",4,0],["Valencisse",3,1,"Valencisse",0,4],["Blois",4,0,"Blois",4,0],["Valencisse",3,1,"Valencisse",0,4]],33,15],
+ ["T2","Nord — Vendôme+Épiais (L-Me-V) · Montoire+Cormenon (Ma-J-S)",6,[["Vendôme",4,0,"Épiais",4,0],["Montoire",4,0,"Cormenon",3,1],["Vendôme",4,0,"Épiais",4,0],["Montoire",4,0,"Cormenon",3,1],["Vendôme",4,0,"Épiais",3,1],["Montoire",3,1,"Cormenon",3,1]],43,5],
+ ["T3","Sologne Sud — Mur (L-Me-V) · Romorantin+La Ferté (Ma-J-S)",6,[["Mur-de-Sologne",4,0,"Mur-de-Sologne",1,3],["Romorantin",3,1,"La Ferté-Imb.",2,2],["Mur-de-Sologne",4,0,"Mur-de-Sologne",1,3],["Romorantin",3,1,"La Ferté-Imb.",2,2],["Mur-de-Sologne",4,0,"Mur-de-Sologne",1,3],["Romorantin",2,2,"La Ferté-Imb.",1,3]],28,20],
+ ["T4","Sologne Est — Crouy (L-Me-V) · Vouzon (Ma-J-S)",6,[["Crouy-s-Cosson",4,0,"Crouy-s-Cosson",0,4],["Vouzon",3,1,"Vouzon",0,4],["Crouy-s-Cosson",4,0,"Crouy-s-Cosson",0,4],["Vouzon",3,1,"Vouzon",0,4],["Crouy-s-Cosson",3,1,"Crouy-s-Cosson",0,4],["Vouzon",3,1,"Vouzon",0,4]],20,28],
+ ["T5","Sud-Ouest — Pontlevoy (SAV L-Me-V · PROD Ma-J-S)",6,[["Pontlevoy",4,0,"Pontlevoy",4,0],["Pontlevoy",0,4,"Pontlevoy",0,4],["Pontlevoy",4,0,"Pontlevoy",4,0],["Pontlevoy",0,4,"Pontlevoy",0,4],["Pontlevoy",4,0,"Pontlevoy",4,0],["Pontlevoy",0,4,"Pontlevoy",0,4]],24,24],
+ ["T6","Blois — mixte SAV / PROD",5,[["Blois",4,0,"Blois",0,4],["Blois",4,0,"Blois",0,4],["Blois",4,0,"Blois",0,4],["Blois",4,0,"Blois",0,4],["Blois",4,0,"Blois",0,4],null],20,20],
+ ["T7","Blois — PROD",5,[["Blois",0,4,"Blois",0,4],["Blois",0,4,"Blois",0,4],["Blois",0,4,"Blois",0,4],["Blois",0,4,"Blois",0,4],["Blois",0,4,"Blois",0,4],null],0,40],
+ ["T8","Blois — PROD",5,[["Blois",0,4,"Blois",0,4],["Blois",0,4,"Blois",0,4],["Blois",0,4,"Blois",0,4],["Blois",0,4,"Blois",0,4],["Blois",0,4,"Blois",0,4],null],0,40],
+ ["T9","Nord — PROD Vendômois / Beauce",5,[["Vendôme",0,4,"Épiais",0,4],["Montoire",0,4,"Cormenon",0,4],["Vendôme",0,4,"Épiais",0,4],["Épiais",0,4,"Épiais",0,4],["Montoire",0,4,"Montoire",0,4],null],0,40],
+ ["T10","Sologne / Sud-Ouest — PROD",5,[["Romorantin",0,4,"Mur-de-Sologne",0,4],["Pontlevoy",0,4,"Pontlevoy",0,4],["Romorantin",0,4,"Mur-de-Sologne",0,4],["Pontlevoy",0,4,"Pontlevoy",0,4],["Romorantin",0,4,"La Ferté-Imb.",0,4],null],0,40],
+ ["T11","Renfort flottant — réserve opérationnelle",5,[["Blois",0,4,"Blois",0,4],["Épiais",0,4,"Vendôme",0,4],["Blois",0,4,"Blois",0,4],["Montoire",0,4,"Montoire",0,4],["Crouy-s-Cosson",0,4,"Crouy-s-Cosson",0,4],null],0,40],
 ];
 document.getElementById('gridbody').innerHTML=G.map(([id,role,nj,days,sv,pr])=>{
   const cells=days.map(d=>{
     if(!d) return '<td class="off"><span>repos</span></td>';
-    const[s1,t1,n1,s2,t2,n2]=d;
-    return `<td><div class="half">
-      <div class="hb ${t1.toLowerCase()}"><span class="s">${s1}</span><span class="c">${t1} ${n1}</span></div>
-      <div class="hb ${t2.toLowerCase()}"><span class="s">${s2}</span><span class="c">${t2} ${n2}</span></div>
-    </div></td>`;}).join('');
+    const[s1,a1,p1,s2,a2,p2]=d;
+    const bloc=(s,a,p)=>{
+      const cls=a&&p?'mix':(a?'sav':'prod');
+      const txt=[a?`SAV ${a}`:null,p?`PROD ${p}`:null].filter(Boolean).join(' · ');
+      return `<div class="hb ${cls}"><span class="s">${s}</span><span class="c">${txt}</span></div>`;};
+    return `<td><div class="half">${bloc(s1,a1,p1)}${bloc(s2,a2,p2)}</div></td>`;}).join('');
   return `<tr><td class="tech"><div class="id">${id}</div><div class="rl">${role}</div>
     <div class="dy ${nj===6?'six':''}">${nj} jours</div></td>${cells}
     <td class="tot"><span class="sv">${sv||'—'}</span></td><td class="tot"><span class="pr">${pr||'—'}</span></td></tr>`;
 }).join('');
 
 const S=[
- ["Blois",5,"OK",6,"Quotidien",42,243],
- ["Pontlevoy",5,"OK",6,"Quotidien",24,89],
- ["Épiais",3,"KO",5,"Quotidien",11,51],
- ["Mur-de-Sologne",2,"KO",3,"L-Me-V",10,49],
- ["Vendôme",3,"OK",3,"L-Me-V",9,39],
- ["Montoire-sur-le-Loir",2,"KO",3,"Ma-J-S",8,48],
- ["Crouy-sur-Cosson",2,"KO",3,"L-Me-V",8,52],
- ["Cormenon",1,"KO",3,"Ma-J-S",7,19],
- ["Vouzon",1,"KO",3,"Ma-J-S",7,33],
- ["Valencisse",2,"KO",3,"Ma-J-S",6,44],
- ["Romorantin-Lanthenay",2,"KO",3,"Ma-J-S",6,44],
- ["La Ferté-Imbault",2,"KO",3,"Ma-J-S",4,18],
+ ["Blois",5,"OK",5,"Quotidien",160,138,44,42,116,61.7],
+ ["Pontlevoy",5,"OK",3,"L-Me-V",64,62,24,24,40,22.5],
+ ["Épiais",3,"KO",3,"L-Me-V",32,32,11,11,21,12.9],
+ ["Mur-de-Sologne",2,"KO",3,"L-Me-V",32,30,15,10,17,12.5],
+ ["Crouy-sur-Cosson",2,"KO",3,"L-Me-V",32,28,11,8,21,13.3],
+ ["Montoire-sur-le-Loir",2,"KO",3,"Ma-J-S",32,27,11,8,21,12.3],
+ ["Vendôme",3,"OK",3,"L-Me-V",24,25,12,9,12,9.8],
+ ["Romorantin-Lanthenay",2,"KO",3,"Ma-J-S",24,23,8,6,16,11.3],
+ ["Valencisse",2,"KO",3,"Ma-J-S",24,23,9,6,15,11.1],
+ ["Vouzon",1,"KO",3,"Ma-J-S",24,21,9,7,15,8.5],
+ ["Cormenon",1,"KO",3,"Ma-J-S",16,16,9,7,7,4.9],
+ ["La Ferté-Imbault",2,"KO",3,"Ma-J-S",16,11,5,4,11,4.5],
 ];
 const dots=(n,max=6)=>'<span class="dots">'+Array.from({length:max},(_,i)=>
   `<span class="dot${i<n?'':' e'}"></span>`).join('')+'</span>';
-document.getElementById('sectorbody').innerHTML=S.map(([n,pa,st,pp,ry,cr,pm])=>
+document.getElementById('sectorbody').innerHTML=S.map(([n,pa,st,pp,ry,cr,ci,sv,sd,pd,pdem])=>
  `<tr><td><b>${n}</b></td>
   <td class="c">${dots(pa)}</td>
   <td class="c"><span class="pill ${st==='OK'?'ok':'ko'}">${st==='OK'?'J+1/J+2':'jusqu\'à J+6'}</span></td>
   <td class="c">${dots(pp)}</td><td><span class="rythme">${ry}</span></td>
   <td class="c"><span class="pill ok">J+1/J+2</span></td>
-  <td class="n">${cr}</td><td class="n">${pm}</td></tr>`).join('');
+  <td class="n">${cr}</td><td class="n">${sv} / ${sd}</td><td class="n">${pd} / ${pdem}</td></tr>`).join('');
 
 const P=[["Blois",47.586,1.336,"X"],["Valencisse",47.590,1.220,"N"],["Pontlevoy",47.395,1.256,"S"],
  ["Vendôme",47.793,1.066,"N"],["Épiais",47.760,1.375,"N"],["Montoire",47.752,0.866,"N"],
