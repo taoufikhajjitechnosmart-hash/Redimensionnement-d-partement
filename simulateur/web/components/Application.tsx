@@ -5,12 +5,14 @@ import type { Referentiel, Scenario, Technicien, VolumeSecteur } from '@sim/engi
 import { Simulateur } from './Simulateur';
 import { GrilleAffectation } from './GrilleAffectation';
 import { Import } from './Import';
+import { Comparaison } from './Comparaison';
 
-type Onglet = 'dimensionnement' | 'grille' | 'import';
+type Onglet = 'dimensionnement' | 'grille' | 'comparaison' | 'import';
 
 const ONGLETS: readonly { id: Onglet; libelle: string }[] = [
   { id: 'dimensionnement', libelle: 'Dimensionnement' },
   { id: 'grille', libelle: 'Grille par technicien' },
+  { id: 'comparaison', libelle: 'Comparaison' },
   { id: 'import', libelle: 'Import' },
 ];
 
@@ -67,6 +69,14 @@ export function Application({ referentielInitial, preregles, techniciens }: Prop
           scenario={scenario}
           referentiel={referentiel}
           techniciens={techniciens}
+        />
+      )}
+
+      {onglet === 'comparaison' && (
+        <Comparaison
+          referentiel={referentiel}
+          preregles={preregles}
+          scenarioCourant={scenario}
         />
       )}
 

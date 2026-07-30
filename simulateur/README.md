@@ -66,6 +66,9 @@ route ne change.
 | `GET` | `/api/scenarios/:id` | lit |
 | `PUT` | `/api/scenarios/:id` | remplace |
 | `DELETE` | `/api/scenarios/:id` | supprime |
+| `POST` | `/api/import` | lit un classeur de suivi et renvoie les volumes |
+| `GET` | `/api/export?ids=a,b` | classeur de restitution des scénarios enregistrés |
+| `POST` | `/api/export` | classeur de restitution de scénarios envoyés directement |
 
 Tout scénario est validé par le schéma zod puis par `verifierCoherence` avant
 enregistrement. Un passage le samedi dans un scénario de cinq jours est refusé en 422.
@@ -125,7 +128,7 @@ Elles sont affichées en tête de l'application et doivent le rester.
 - Le samedi coûte environ 4 % de kilomètres de plus. Il se justifie par le lissage de
   charge et le délai client, pas par l'économie de trajets.
 
-## Les trois onglets
+## Les quatre onglets
 
 **Dimensionnement** — réglages, indicateurs, tableau des secteurs avec créneaux et
 jours de passage modifiables, quatre graphiques, liste des alertes.
@@ -135,6 +138,11 @@ technicien/jour. Les règles sont contrôlées à chaque dépôt : capacité, se
 journée, distance d'enchaînement, régime du technicien. Les cases en infraction sont
 marquées et le motif exact listé. Le bouton *Proposer une répartition* appelle le
 solveur glouton ; ce qu'il ne place pas reste visible dans la réserve.
+
+**Comparaison** — plusieurs scénarios côte à côte : le scénario en cours d'édition, les
+préréglages et tout ce qui a été enregistré. Douze indicateurs en colonnes, la meilleure
+valeur mise en avant quand la ligne a un sens de lecture, puis le délai J+2 secteur par
+secteur.
 
 **Import** — lecture du classeur de suivi, rapprochement des libellés GRDV insensible
 aux accents, rapport d'écart secteur par secteur avant application. Les secteurs
@@ -146,9 +154,14 @@ peuvent pas entrer dans un calcul de distances.
 Voir `DEPLOIEMENT.md`. La table Postgres est créée ; restent le rattachement du dépôt à
 Vercel et les deux variables d'environnement.
 
+## Classeur de restitution
+
+Sept onglets : synthèse comparative, un onglet de détail par scénario, contrôle J+2,
+matrice des distances et hypothèses retenues. Ce dernier n'est pas décoratif — sans lui
+les chiffres des autres ne sont pas interprétables, puisque la demande dépend
+entièrement des paramètres de conversion.
+
 ## Reste à faire
 
-- Export du classeur de restitution depuis l'application.
-- Comparaison de plusieurs scénarios côte à côte.
 - Départements 37, 44 et 49 — un fichier de données par département, aucun code.
 - Fournisseur de distances réelles à la place de l'approximation géométrique.

@@ -35,6 +35,7 @@ interface Props {
 export function Simulateur({ referentiel, preregles, scenario, setScenario }: Props) {
   const [message, setMessage] = useState<string | null>(null);
   const [enregistrement, setEnregistrement] = useState(false);
+  const [export_, setExport] = useState(false);
 
   const resultat = useMemo((): Resultat | { erreur: string } => {
     try {
@@ -121,6 +122,36 @@ export function Simulateur({ referentiel, preregles, scenario, setScenario }: Pr
       setMessage(erreur instanceof Error ? erreur.message : 'Enregistrement impossible.');
     } finally {
       setEnregistrement(false);
+    }
+  }, [scenario]);
+
+  const exporter = useCallback(async () => {
+    setExport(true);
+    setMessage(null);
+    try {
+      const reponse = await fetch('/api/export', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ scenarios: [scenario], departement: scenario.departement }),
+      });
+      if (!reponse.ok) {
+        const corps = await reponse.json().catch(() => ({}));
+        throw new Error(corps.erreur ?? `Erreur ${reponse.status}`);
+      }
+      // Nom de fichier fourni par le serveur, dans l'en-tête content-disposition.
+      const entete = reponse.headers.get('content-disposition') ?? '';
+      const nomFichier = /filename="([^"]+)"/.exec(entete)?.[1] ?? 'dimensionnement.xlsx';
+      const blob = await reponse.blob();
+      const lien = document.createElement('a');
+      lien.href = URL.createObjectURL(blob);
+      lien.download = nomFichier;
+      lien.click();
+      URL.revokeObjectURL(lien.href);
+      setMessage(`Classeur « ${nomFichier} » téléchargé.`);
+    } catch (erreur) {
+      setMessage(erreur instanceof Error ? erreur.message : 'Export impossible.');
+    } finally {
+      setExport(false);
     }
   }, [scenario]);
 
@@ -475,7 +506,7 @@ export function Simulateur({ referentiel, preregles, scenario, setScenario }: Pr
       </section>
 
       <section className="carte">
-        <h2>Enregistrer</h2>
+        <h2>Enregistrer et exporter</h2>
         <div className="actions">
           <input
             className="saisie-creneaux"
@@ -491,6 +522,14 @@ export function Simulateur({ referentiel, preregles, scenario, setScenario }: Pr
             disabled={enregistrement || scenario.nom.trim().length === 0}
           >
             {enregistrement ? 'Enregistrement…' : 'Enregistrer ce scénario'}
+          </button>
+          <button
+            type="button"
+            className="bouton"
+            onClick={() => void exporter()}
+            disabled={export_}
+          >
+            {export_ ? 'Génération…' : 'Exporter en Excel'}
           </button>
           <button
             type="button"
