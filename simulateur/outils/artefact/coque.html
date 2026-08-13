@@ -1,0 +1,284 @@
+<title>Dimensionnement Loir-et-Cher</title>
+<style>
+  /* Palette complète en clair sur :root — jamais de couleur définie
+     uniquement dans un bloc conditionnel. */
+  :root {
+    --sol: #fbfcfd;
+    --surface: #ffffff;
+    --surface-2: #f1f4f6;
+    --encre: #16202a;
+    --encre-2: #4c5c69;
+    --encre-3: #87939d;
+    --bord: #dce3e8;
+    --bord-fort: #c3ced6;
+    --accent: #2a6fb8;
+    --accent-doux: #e9f1f9;
+    --bon: #0f8a4a;
+    --bon-doux: #e6f4ec;
+    --attention: #b8811a;
+    --attention-doux: #fbf2df;
+    --alerte: #c33a3a;
+    --alerte-doux: #fbeaea;
+    --r: 7px;
+    --mono: ui-monospace, "SF Mono", "DejaVu Sans Mono", Menlo, monospace;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --sol: #0f1519;
+      --surface: #161e24;
+      --surface-2: #1e282f;
+      --encre: #e7edf1;
+      --encre-2: #a2b0ba;
+      --encre-3: #6f7d88;
+      --bord: #2a343c;
+      --bord-fort: #3a464f;
+      --accent: #5d9ee0;
+      --accent-doux: #16273a;
+      --bon: #3fbf72;
+      --bon-doux: #14301f;
+      --attention: #d9a63c;
+      --attention-doux: #33280f;
+      --alerte: #e46a6a;
+      --alerte-doux: #351d1d;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --sol: #0f1519;
+    --surface: #161e24;
+    --surface-2: #1e282f;
+    --encre: #e7edf1;
+    --encre-2: #a2b0ba;
+    --encre-3: #6f7d88;
+    --bord: #2a343c;
+    --bord-fort: #3a464f;
+    --accent: #5d9ee0;
+    --accent-doux: #16273a;
+    --bon: #3fbf72;
+    --bon-doux: #14301f;
+    --attention: #d9a63c;
+    --attention-doux: #33280f;
+    --alerte: #e46a6a;
+    --alerte-doux: #351d1d;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--sol);
+    color: var(--encre);
+    font-family: var(--sans);
+    font-size: 14px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page { max-width: 1220px; margin: 0 auto; padding: 26px 20px 80px; }
+
+  h1, h2, h3 { margin: 0; line-height: 1.22; letter-spacing: -0.012em; text-wrap: balance; }
+  h1 { font-size: 21px; font-weight: 660; }
+  h2 { font-size: 14.5px; font-weight: 650; }
+  h3 { font-size: 12px; font-weight: 650; text-transform: uppercase; letter-spacing: 0.05em; color: var(--encre-2); }
+
+  button, input, select { font: inherit; color: inherit; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+  header.tete {
+    display: flex; flex-wrap: wrap; gap: 10px 20px;
+    align-items: baseline; justify-content: space-between;
+    padding-bottom: 14px; border-bottom: 1px solid var(--bord); margin-bottom: 16px;
+  }
+  .soustitre { color: var(--encre-3); font-size: 12.5px; }
+
+  .avis {
+    display: flex; gap: 10px; align-items: flex-start;
+    background: var(--attention-doux); border: 1px solid var(--attention);
+    border-radius: var(--r); padding: 11px 13px; margin-bottom: 16px;
+    font-size: 12.5px; line-height: 1.55;
+  }
+  .avis-marque { flex: none; color: var(--attention); font-weight: 700; }
+
+  .onglets { display: flex; gap: 2px; border-bottom: 1px solid var(--bord); margin-bottom: 16px; flex-wrap: wrap; }
+  .onglet {
+    background: none; border: none; border-bottom: 2px solid transparent;
+    padding: 8px 14px; font-size: 13px; font-weight: 600;
+    color: var(--encre-3); cursor: pointer; margin-bottom: -1px;
+  }
+  .onglet:hover { color: var(--encre); }
+  .onglet[aria-selected="true"] { color: var(--accent); border-bottom-color: var(--accent); }
+
+  .bloc {
+    background: var(--surface); border: 1px solid var(--bord);
+    border-radius: var(--r); padding: 15px; margin-bottom: 14px;
+  }
+  .bloc > h2 { margin-bottom: 11px; }
+  .entete-bloc {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    align-items: center; justify-content: space-between; margin-bottom: 6px;
+  }
+  .entete-bloc > h2 { margin-bottom: 0; }
+
+  .reglages { display: grid; grid-template-columns: repeat(auto-fit, minmax(166px, 1fr)); gap: 11px 16px; }
+  .champ { display: flex; flex-direction: column; gap: 4px; }
+  .champ > span { font-size: 11.5px; font-weight: 600; color: var(--encre-2); }
+  .champ > select, .champ > input {
+    background: var(--sol); border: 1px solid var(--bord-fort);
+    border-radius: 5px; padding: 6px 8px; font-size: 13px; min-width: 0;
+  }
+
+  .note { font-size: 11px; color: var(--encre-3); margin: 8px 0 0; }
+  .vide { color: var(--encre-3); font-size: 12.5px; font-style: italic; }
+  .message { font-size: 12px; color: var(--encre-2); }
+
+  /* Indicateurs */
+  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(146px, 1fr)); gap: 9px; margin-bottom: 14px; }
+  .kpi { background: var(--surface); border: 1px solid var(--bord); border-radius: var(--r); padding: 11px 13px; }
+  .kpi-lib { font-size: 10.5px; font-weight: 650; color: var(--encre-3); text-transform: uppercase; letter-spacing: 0.045em; }
+  .kpi-val { font-family: var(--mono); font-size: 23px; font-weight: 600; letter-spacing: -0.02em; margin-top: 1px; font-variant-numeric: tabular-nums; }
+  .kpi-det { font-size: 11.5px; color: var(--encre-3); }
+
+  .est-bon { color: var(--bon); }
+  .est-alerte { color: var(--alerte); }
+  .est-attention { color: var(--attention); }
+
+  /* Tables */
+  .defile { overflow-x: auto; border: 1px solid var(--bord); border-radius: var(--r); }
+  table { border-collapse: collapse; width: 100%; min-width: 880px; font-size: 12.5px; }
+  thead th {
+    background: var(--surface-2); text-align: left; font-size: 10.5px; font-weight: 650;
+    text-transform: uppercase; letter-spacing: 0.045em; color: var(--encre-2);
+    padding: 8px 10px; border-bottom: 1px solid var(--bord); white-space: nowrap;
+  }
+  tbody td { padding: 6px 10px; border-bottom: 1px solid var(--bord); vertical-align: middle; }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: var(--surface-2); }
+  .num { font-family: var(--mono); text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .nom { font-weight: 600; white-space: nowrap; }
+  .puce {
+    display: inline-block; font-size: 10px; font-weight: 650; padding: 1px 5px;
+    border-radius: 4px; background: var(--surface-2); color: var(--encre-2); margin-left: 6px;
+  }
+  .saisie {
+    width: 62px; text-align: right; font-family: var(--mono);
+    background: var(--sol); border: 1px solid var(--bord-fort); border-radius: 5px; padding: 3px 6px;
+  }
+  .saisie.large { width: 258px; text-align: left; font-family: var(--sans); }
+
+  /* Sélecteur de jours */
+  .jours { display: flex; gap: 3px; }
+  .jour {
+    width: 26px; height: 23px; border: 1px solid var(--bord-fort); border-radius: 5px;
+    background: var(--sol); color: var(--encre-3); font-size: 11px; font-weight: 620; cursor: pointer; padding: 0;
+  }
+  .jour:hover:not(:disabled) { border-color: var(--accent); }
+  .jour[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .jour:disabled { opacity: 0.3; cursor: not-allowed; }
+
+  .etat { display: inline-block; font-size: 10.5px; font-weight: 650; padding: 2px 7px; border-radius: 999px; white-space: nowrap; }
+  .etat-bon { background: var(--bon-doux); color: var(--bon); }
+  .etat-alerte { background: var(--alerte-doux); color: var(--alerte); }
+
+  /* Barres */
+  .grille-graphes { display: grid; grid-template-columns: repeat(auto-fit, minmax(298px, 1fr)); gap: 14px; }
+  .barres { display: flex; flex-direction: column; gap: 5px; }
+  .barre-ligne { display: grid; grid-template-columns: 126px 1fr 56px; align-items: center; gap: 8px; }
+  .barre-lib { font-size: 11.5px; color: var(--encre-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .piste { position: relative; height: 15px; background: var(--surface-2); border-radius: 4px; overflow: hidden; display: block; }
+  .remplissage { display: block; height: 100%; min-width: 2px; border-radius: 4px; }
+  .ton-bon { background: var(--bon); }
+  .ton-alerte { background: var(--alerte); }
+  .ton-accent { background: var(--accent); }
+  .ton-neutre { background: var(--bord-fort); }
+  .seuil { position: absolute; top: -2px; bottom: -2px; width: 1.5px; background: var(--encre); opacity: 0.5; }
+  .barre-val { font-family: var(--mono); font-size: 11.5px; text-align: right; font-variant-numeric: tabular-nums; }
+
+  .liste { margin: 6px 0 0; padding-left: 18px; font-size: 12.5px; line-height: 1.6; }
+  .liste li::marker { color: var(--alerte); }
+
+  .actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .bouton {
+    background: var(--sol); border: 1px solid var(--bord-fort); border-radius: 6px;
+    padding: 6px 12px; font-size: 12.5px; font-weight: 580; cursor: pointer;
+  }
+  .bouton:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+  .bouton:disabled { opacity: 0.42; cursor: not-allowed; }
+  .bouton.primaire { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .bouton.primaire:hover:not(:disabled) { filter: brightness(1.08); color: #fff; }
+
+  /* Grille par technicien */
+  table.grille { min-width: 940px; }
+  table.grille td { vertical-align: top; }
+  .cel-tech { min-width: 170px; }
+  .cel-tech .nom { display: block; }
+  .meta { display: block; font-size: 10.5px; color: var(--encre-3); }
+  .case {
+    min-width: 126px; min-height: 60px; background: var(--surface);
+    border-left: 1px solid var(--bord); padding: 4px 5px 16px; position: relative;
+  }
+  .case-survol { background: var(--accent-doux); box-shadow: inset 0 0 0 2px var(--accent); }
+  .case-faute { background: var(--alerte-doux); box-shadow: inset 0 0 0 1px var(--alerte); }
+  .case-repos { background: var(--surface-2); }
+  .repos { font-size: 10.5px; color: var(--encre-3); font-style: italic; }
+  .vacation, .jeton {
+    display: inline-flex; align-items: center; gap: 3px;
+    background: var(--accent-doux); color: var(--accent); border: 1px solid var(--accent);
+    border-radius: 5px; padding: 2px 4px 2px 6px; font-size: 11px; font-weight: 600;
+    cursor: grab; margin: 0 3px 3px 0; max-width: 100%;
+  }
+  .vacation:active, .jeton:active { cursor: grabbing; }
+  .jeton { background: var(--surface-2); color: var(--encre-2); border-color: var(--bord-fort); padding: 3px 8px; }
+  .vacation b, .jeton b { font-family: var(--mono); font-weight: 700; }
+  .retirer { background: none; border: none; color: inherit; cursor: pointer; font-size: 13px; line-height: 1; padding: 0 1px; opacity: 0.6; }
+  .retirer:hover { opacity: 1; }
+  .total-case { position: absolute; right: 5px; bottom: 3px; font-family: var(--mono); font-size: 10px; color: var(--encre-3); }
+  .reserve { display: grid; grid-template-columns: repeat(auto-fit, minmax(146px, 1fr)); gap: 11px; }
+  .colonne { background: var(--sol); border: 1px solid var(--bord); border-radius: 6px; padding: 8px; min-height: 74px; }
+  .colonne > h3 { margin-bottom: 6px; }
+
+  /* Choix de comparaison */
+  .choix-liste { display: grid; grid-template-columns: repeat(auto-fit, minmax(252px, 1fr)); gap: 4px 16px; }
+  .choix { display: flex; align-items: baseline; gap: 7px; padding: 5px 7px; border-radius: 6px; cursor: pointer; font-size: 12.5px; }
+  .choix:hover { background: var(--surface-2); }
+  .choix input { accent-color: var(--accent); cursor: pointer; }
+  .choix > span { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 6px; }
+  .choix .note { margin: 0; white-space: nowrap; }
+
+  footer.pied { margin-top: 26px; padding-top: 14px; border-top: 1px solid var(--bord); font-size: 11.5px; color: var(--encre-3); line-height: 1.6; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+</style>
+
+<div class="page">
+  <header class="tete">
+    <div>
+      <h1>Simulateur de dimensionnement</h1>
+      <div class="soustitre">Département 41 — Loir-et-Cher · 12 secteurs GRDV · 11 techniciens</div>
+    </div>
+    <div class="soustitre">Techno Smart</div>
+  </header>
+
+  <div class="avis">
+    <span class="avis-marque" aria-hidden="true">!</span>
+    <div>
+      <b>Aucun volume SAV mesuré n’alimente ce calcul.</b> La demande affichée ne couvre que la production ;
+      le SAV est absorbé par l’écart entre l’offre ouverte et cette demande. L’effectif est un minimum
+      structurel — journée de pointe par zone, sans absences ni congés.
+    </div>
+  </div>
+
+  <div id="app"></div>
+
+  <footer class="pied">
+    Version de démonstration, autonome : elle embarque le même moteur de calcul que l’application, mais
+    conserve les scénarios dans ce navigateur seulement. L’import du classeur de suivi, l’export Excel et la
+    base de données partagée n’existent que dans l’application complète.
+    <br>
+    Volumes de production : suivi_volumes_PROD, mise à jour du 28 juillet 2026. Distances estimées par vol
+    d’oiseau majoré de 25 %, à recaler sur un outil de tournées.
+  </footer>
+</div>
